@@ -10,11 +10,8 @@ class Products extends CI_Controller {
 
     public function index()
     {
-<<<<<<< HEAD:application/controllers/main.php
         $this->load->view('customers/carts');
-=======
         $this->load->view('index');
->>>>>>> 13caa61acc4ba55d789357f19af82c9201de33e8:application/controllers/products.php
     }
 }
 
