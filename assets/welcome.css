@@ -1,0 +1,27 @@
+.menu{
+	border: 2px solid black;
+	margin-right: 20px;
+	}
+
+.photos{
+	border: 2px solid black;
+}
+
+img{
+	height:70px;
+	width:70px;
+	margin-left: 17px;
+}
+
+.products{
+	margin: 10px;
+}
+
+.links {
+	margin-top: 22px;
+}
+
+#first_link {
+	margin-left: 190px;
+}
+
