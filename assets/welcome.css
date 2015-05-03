@@ -14,7 +14,9 @@ img{
 }
 
 .products{
-	margin: 10px;
+	/*margin: 10px;*/
+	width: 150px;
+	height: 150px;
 }
 
 .links {
@@ -25,3 +27,15 @@ img{
 	margin-left: 190px;
 }
 
+p{
+	display: inline-block;
+}
+
+.display{
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+label{
+	display: inline-block;
+}

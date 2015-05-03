@@ -3,9 +3,9 @@
   <meta charset="utf-8" />
   <meta name="description" content="This website is using Twitter Bootstrap"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/js/bootstrap.min.js">
   <!-- <link rel="stylesheet" type="text/css" href="assets/login.css"> -->
 </head>
 <body>  
@@ -19,7 +19,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Dojo Ecommerce</a>
+        <a class="navbar-brand" href="/">Dojo eCommerce</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 

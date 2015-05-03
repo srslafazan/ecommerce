@@ -2,10 +2,22 @@
 
 class Product extends CI_Model {  
 	
-	public function get_products($category, $page)
+	public function get_products($category, $page, $search)
 	{ 
-	// 	var_dump($category);
-	// 	var_dump($page);
+
+		if($category === "All Products")
+		{
+			$category = 0;
+		}
+		if(!empty($search)) {
+			$search = $search['search'];
+			$search = "%" . $search . "%";
+		} else 
+		{
+			$search = "%";
+		}
+		
+
 		$query = "SELECT products.id as product_id, products.name as product_name, products.description as product_description, 
 		products.price as price, categories.id as category_id, categories.name as category from products
 		LEFT JOIN product_categories 
@@ -13,13 +25,13 @@ class Product extends CI_Model {
 		LEFT JOIN categories
 		ON product_categories.category_id = categories.id
 		WHERE categories.name = ?
+		AND products.name LIKE ?
 		LIMIT ?,15";
 
-		$values = array($category, (int)$page); 
+		$values = array($category, $search, (int)$page); 
 
 		return $this->db->query($query, $values) -> result_array();
-	}
-    
+    }
 }
 
 

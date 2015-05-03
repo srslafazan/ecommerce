@@ -14,11 +14,12 @@ class Products extends CI_Controller {
 
     public function index()
     {
-
     	$category = 0;
     	$page = 0;
-    	$offers['offers'] = $this->Product->get_products($category, $page);
-    	$this->load->view('index', $offers);
+        $search = '';
+    	$offers['offers'] = $this->Product->get_products($category, $page, $search);
+        $offers['category'] = "All Products";
+    	$this->load->view('customers/index', $offers);
     
     }
 
@@ -26,15 +27,24 @@ class Products extends CI_Controller {
     {
     	$category = $this->input->post('category');
     	$page = 0;
-  
+        $search = '';
+    	$offers['offers'] = $this->Product->get_products($category, $page, $search);
+        $offers['offers'][0]['category_title'] = $category;
 
-    	$offers['offers'] = $this->Product->get_products($category, $page);
-    	$this->load->view('index', $offers);
+        $this->load->view('customers/index', $offers);
+    }
 
+    public function product_search()
+    {
+        $search = $this->input->post();
+        $offers['offers'] = $this->Product->get_products(0, 0, $search);
+        $offers['offers'][0]['category_title'] = "Products like " . $this->input->post('search') . ":";
+        $this->load->view('customers/index', $offers);
+    }
 
-        $this->load->view('customers/carts');
-        $this->load->view('index');
-
+    public function product_view($id)
+    {
+        $this->load->view('customers/shows', array('id' => $id));
     }
 }
 

@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>Shopping Cart | Dojo eCommerce</title>
+    <meta charset="utf-8" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="/assets/welcome.css">
 </head>
 <body>
 <!-- nav -->
