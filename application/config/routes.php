@@ -3,6 +3,7 @@
 // main routes
 $route['default_controller'] = "products";
 $route['404_override'] = '';
+$route['(:any)/(:any)'] = 'products/get_product/$1/$2';
 // end of main routes
 
 

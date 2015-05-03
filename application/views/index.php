@@ -10,31 +10,41 @@
 	<link rel="stylesheet" type="text/css" href="assets/welcome.css">
  </head>
  <body>	
- 	<?php  $this->load->view('partials/header');     ?>
- 	
+ 	<?php 
+ 	var_dump($offers);
+ 	$this->load->view('partials/header');     
+ 	?>
  	<div class="container">
-		<div class="row">
-				<div class="col-sm-3 menu">
-					<form class="navbar-form navbar-left" role="search">
-				        <div class="form-group">
-				          <input type="text" class="form-control" placeholder="Search">
-				          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidde="true"></span></button>
-				        </div>
+			 <div class="row">
+			<!-- left side column where user can search for a product and click links that will display particular products-->
+				
 				    	<h5>Categories:</h5>
-				    	<ul>
-							<li><a href="#">T-Shirts</a></li>
-							<li><a href="#">Shoes</a></li>
-							<li><a href="#">Jackets</a></li>
-							<li><a href="#">Hats</a></li>
-							<li><a href="#">Wallet</a></li>
-							<li><a href="#">Jeans</a></li>
-				    	</ul>
-	      			</form>
+				    	<form action="/products/get_product" method="post">
+				    	   <input type="hidden" name="category" value="t-shirts">
+						   <input type="submit" class="btn btn-default" value="t-shirts"/>
+						</form>
+						<form action="/products/get_product" method="post">
+							<input type="hidden" name="category" value="jeans">
+						    <input type="submit" class="btn btn-default" value="jeans"/>
+						</form>
+						<form action="/products/get_product" method="post">
+				    		<input type="hidden" name="cups" value="hats"/>
+						    <input type="submit" class="btn btn-default" value="hats"/>
+						</form>
+						<form action="/products/get_product" method="post">
+				    		<input type="hidden" name="glasses" value="glasses"/>
+						    <input type="submit" class="btn btn-default" value="glasses"/>
+						</form>
+						<form action="/products/get_product" method="post">
+				    		<input type="hidden" name="show all" value="shoes"/>
+						    <input type="submit" class="btn btn-default" value="shoes"/>
+						</form>
 				</div>
 				<div class="col-sm-8 photos">
 					<div class="col-sm-12">
-						<div class="col-sm-6">
-							<h3>Hats (page 2)</h3>
+				 <!--right side column where the product displays and there is an option to sort by specifi actions -->
+						<div class="col-sm-6" >
+							<h3><?= $offers[0]['category'] ?> (page 2)</h3>
 						</div>
 						<div class="col-sm-6 links ">
 							<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
@@ -45,72 +55,22 @@
 							<select class="form-control" id="sorts">
 	 							  <option>Price</option>
 								  <option>Most Popular</option>
-								  <option>New</option>
 							</select>
 					</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for  $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
 
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
 
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
-						<div class="col-sm-2 products">
-							<a href="#"><img src="assets/images/hat_poker.jpg"/></a>
-							<p>White hat for $19.99</p>
-						</div>
 
+					<!--displays all the picures of all our products-->
+				
+
+					<?php foreach ($offers as $offer) { ?>
+						<div class="col-sm-2 products">
+							<a href=""><img src="assets/images/hat_poker.jpg"/></a>
+							<p><?= $offer['product_name'] ?> for  <?= $offer['price'] ?></p>
+						</div>
+					<?php } ?> 
+				
+						<!--pagination-->
 						<div class="col-sm-6 links ">
 							<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
 						</div>
