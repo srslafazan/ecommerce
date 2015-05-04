@@ -32,10 +32,10 @@ class Admin extends CI_Controller {
     public function load_products_dashboard($category, $page, $search)
     {
         $return = $this->Admin->get_products();
-        $products['products'] = $return[0];
-        $products['browse'] = $return[1];
-        
-        $this->load->view('admin/products',);
+        $products['products']['products'] = $return[0];
+        $products['products']['browse'] = $return[1];
+
+        $this->load->view('admin/products', $products);
     }
 
     public function edit_product()
