@@ -13,6 +13,6 @@ $route['products/search_by_price'] = 'products/product_search';
 $route['cart'] = 'products/view_carts';
 
 // admin routes
-$route['admins'] = 'admins';
+// $route['admins'] = 'admins';
 
 //end of routes.php

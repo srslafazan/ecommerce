@@ -30,6 +30,7 @@
     </style>
 </head>
 <body>	
+<?php var_dump($products); ?>
  	<?php $this->load->view('partials/header_red'); ?>
  <?php $this->load->view('partials/new_product'); ?>
  	

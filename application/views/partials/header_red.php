@@ -16,13 +16,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Dashboard</a>
+        <a class="navbar-brand" href="/admins/orders">Dashboard</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
         <ul class="nav navbar-nav">
-          <li><a href="#">Orders</a></li>
-          <li><a href="#">Products</a></li>
+          <li><a href="/admins/orders">Orders</a></li>
+          <li><a href="/admins/products">Products</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">log off</a></li>

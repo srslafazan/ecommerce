@@ -11,36 +11,36 @@ class Admins extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('admin/signins');
+        $this->load->view('admins/signins');
     }
     
     public function orders()
     {
-        $this->load->view('admin/orders');
+        $this->load->view('admins/orders');
     }
     
     public function show_order()
     {
-        $this->load->view('admin/show');
+        $this->load->view('admins/show');
     }
 
-    public function products_index(){
-        $this->load->view('admin/products');
+    public function products()
+    {
         $this->load_products_dashboard(0, 0, '');
     }
 
     public function load_products_dashboard($category, $page, $search)
     {
-        $return = $this->Admin->get_products();
+        $return = $this->Admin->get_products($category, $page, $search);
         $products['products']['products'] = $return[0];
         $products['products']['browse'] = $return[1];
 
-        $this->load->view('admin/products', $products);
+        $this->load->view('admins/products', $products);
     }
 
     public function edit_product()
     {
-        $this->load->view('admin/products');
+        $this->load->view('admins/products');
     }
 
 }
