@@ -1,13 +1,18 @@
 <?php 
-
-    if(!empty($offers[0]["product_id"]))
+    if(isset($offers['products']))
     {
-    foreach ($offers as $offer) { ?>
-
+    foreach ($offers['products'] as $product) { ?>
         <div class="col-sm-2 products">
-            <a href="/products/show/<?=$offer['product_id']?>"><img src="/assets/images/hat_poker.jpg"/></a>
-            <p><?= $offer['product_name'] ?> for  $<?= $offer['price'] ?></p>
-        </div>
+            <a href="/products/show/<?= $product['product_id'] ?>"><img src="/assets/images/hat_poker.jpg"/></a>
+            <p>
 
-<?php } 
+            <?php if(isset($product['product_name']) && isset($product['price'])) 
+                    {
+                        echo $product['product_name'] . ' for $' . $product['price']; 
+                    } ?>
+
+            </p>
+        </div>
+ 
+      <?php } 
         } ?> 
