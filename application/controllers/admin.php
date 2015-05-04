@@ -23,7 +23,7 @@ class Admin extends CI_Controller {
     
     public function show_order()
     {
-        $this->load->view('admin/products');
+        $this->load->view('admin/show');
     }
 
     public function products()
