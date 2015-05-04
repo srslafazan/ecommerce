@@ -1,8 +1,13 @@
-
-  
-
+<style type="text/css">
+  .signin{
+    text-align: center;
+  }
+  .red{
+    background-color: #910000;
+  }
+</style>
   <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+    <div class="container-fluid red">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">

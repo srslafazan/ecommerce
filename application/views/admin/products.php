@@ -26,6 +26,7 @@
 			display: inline-block;
 			margin-bottom: 1.5%;
 		}
+
     </style>
 </head>
 <body>	
