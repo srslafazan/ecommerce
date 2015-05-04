@@ -10,6 +10,14 @@
     <link rel="stylesheet" type="text/css" href="/assets/bootstrap/js/bootstrap.min.js">
     <link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <style type="text/css">
     	.page {
 			text-align: center;
@@ -22,6 +30,7 @@
 </head>
 <body>	
  	<?php $this->load->view('partials/header_red'); ?>
+ <?php $this->load->view('partials/new_product'); ?>
  	
  	<div class="container">
 		
@@ -33,8 +42,12 @@
 		    		<input type='text' name='search'  class='search form-control' placeholder='search'/>
 	    		</div>
 	    	</form> 
-	    	<form class='pull-right filter' action=''>
-	    		<button class='button btn-success'type='submit'>Add new product</button>
+	    	<form class='pull-right filter' action='' method='post'>
+	    		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+  					Add new product 
+				</button>
+				<?php $this->session->set_flashdata('edit', '5'); ?>
+	    		<input type='hidden' name='edit' value='5'>
 	    	</form>
 		</div>
 

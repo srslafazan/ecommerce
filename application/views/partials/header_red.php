@@ -1,19 +1,6 @@
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="description" content="This website is using Twitter Bootstrap"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/js/bootstrap.min.js">
-  <!-- <link rel="stylesheet" type="text/css" href="assets/login.css"> -->
-  <style type="text/css">
-  .navbar{
-    background-color: #910A0A;
-  }
-  </style>
-</head>
-<body>  
+
+  
+
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -38,5 +25,3 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-</body>
-</html>
