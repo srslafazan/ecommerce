@@ -35,9 +35,9 @@
 
 						<h3>
 						<?php 
-							if(empty($offers[0]['category_title'])){
+							if(empty($offers['category_title'])){
 								echo "All Products";
-							} else {  echo $offers[0]['category_title']; }
+							} else {  echo $offers['category_title']; }
 						?>
 
 						(page 2)</h3>
@@ -49,21 +49,22 @@
 
 				<div class="col-sm-offset-7 col-sm-4 display">
 					<form action='/products/sort_by' method='post'> 
-					   <label for="sorts">Sort By:</label>
-					   <select class="form-control" id="sorts">
- 							  <option name='price'>Price</option>
-							  <option name='popular'><a href='/products/customers/carts'>Most Popular</a></option>
+					   	<label for="sorts">Sort By:</label>
+					   	<select class="form-control" id="sorts" name='sort'>
+ 							  <option name='price' value='price'>Price</option>
+							  <option name='popular' value='popular'>Most Popular</option>
 						</select>
+						<input type='submit' value='Sort Products'>
 					</form>
 				</div>
 
 				<!--displays all the picures of all our products-->
 				<?php $this->load->view('partials/products_main') ?> 
 
-					<!--pagination-->
-					<div class="col-sm-12 links ">
-						<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
-					</div>
+				<!--pagination-->
+				<div class="col-sm-12 links ">
+					<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
+				</div>
 			</div>
 		</div>
 	</div>
