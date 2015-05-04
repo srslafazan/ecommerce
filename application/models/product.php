@@ -39,8 +39,8 @@ class Product extends CI_Model {
 					LIMIT ?,15"; 
 		
 		$values = $this->values($category, $search, $page);
-
-		return $this->db->query($query, $values) -> result_array();
+		
+		return array($this->db->query($query, $values) -> result_array(), $values);
     }
 
     public function get_products_popular($category, $page, $search){
