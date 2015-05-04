@@ -46,6 +46,16 @@ class Products extends CI_Controller {
     {
         $this->load->view('customers/shows', array('id' => $id));
     }
+
+    public function get_products_popular (){
+
+
+    }
+
+    public function sort_by() {
+        var_dump($this->input->post());
+        die();
+    }
 }
 
 

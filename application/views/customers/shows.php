@@ -16,7 +16,7 @@
 <?php $this->load->view('partials/header'); ?>
     <div class='container'>
 
-        <a href='#'>Go Back</a>
+        <a href='/'>Go Back</a>
         <div id='product_main'>
             <div>
                 <h2>Black Belt for Staff</h2>

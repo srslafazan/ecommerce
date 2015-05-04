@@ -21,6 +21,7 @@ img{
 
 .links {
 	margin-top: 22px;
+	display:block;
 }
 
 #first_link {
@@ -38,4 +39,8 @@ p{
 
 label{
 	display: inline-block;
+}
+
+.navleft{
+	border: 2px solid black;
 }

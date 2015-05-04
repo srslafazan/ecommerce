@@ -16,48 +16,21 @@
  	<div class="container">
 		 <div class="row">
 		<!-- left side column where user can search for a product and click links that will display particular products-->
-		<div class="col-sm-3">
-				<div>
-					<form action='/products/product_search' method='post' class="navbar-form navbar-left" role="search">
-				        <div class="form-group">
-				          <input type="text" name='search' class="form-control" placeholder="Search">
-				        </div>
-				        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-				     </form>
-						<!-- <input type='submit' value=""><i class='fa fa-search'></i></input> -->
-				</div>
-				<div>
-			    	<h5>Categories:</h5>
-			    	<form action="/products/get_product" method="post">
-			    	   <input type="hidden" name="category" value="T-shirts">
-					   <input type="submit" class="btn btn-default" value="t-shirts"/>
-					</form>
-					<form action="/products/get_product" method="post">
-						<input type="hidden" name="category" value="Jeans">
-					    <input type="submit" class="btn btn-default" value="jeans"/>
-					</form>
-					<form action="/products/get_product" method="post">
-			    		<input type="hidden" name="category" value="Hats"/>
-					    <input type="submit" class="btn btn-default" value="hats"/>
-					</form>
-					<form action="/products/get_product" method="post">
-			    		<input type="hidden" name="category" value="Glasses"/>
-					    <input type="submit" class="btn btn-default" value="glasses"/>
-					</form>
-					<form action="/products/get_product" method="post">
-			    		<input type="hidden" name="category" value="Shoes"/>
-					    <input type="submit" class="btn btn-default" value="shoes"/>
-					</form>
-					<form action="/products/get_product" method="post">
-			    		<input type="hidden" name="category" value="All Products"/>
-					    <input type="submit" class="btn btn-default" value="all products"/>
-					</form>
-				</div>
-			</div>
-			
+		<div class="col-sm-3 navleft">
+
+<!-- load search/browse bar -->
+
+				<?php 	if (empty($this->session->userdata['search']) || $this->session->userdata['search'] == 'price'){
+							$search = 'partials/search_price';
+						} elseif ($this->session->userdata['search'] == 'popular') {
+							$search = 'partials/search_popular';
+						} 
+						
+						$this->load->view($search); ?>	
+		</div>
 			<div class="col-sm-8 photos">
 				<div class="col-sm-12">
-			 <!--right side column where the product displays and there is an option to sort by specifi actions -->
+			 <!--right side column where the product displays and there is an option to sort by specific actions -->
 					<div class="col-sm-6" >
 
 						<h3>
@@ -75,28 +48,20 @@
 				</div>
 
 				<div class="col-sm-offset-7 col-sm-4 display">
-					   <label for"sorts">Sort By:</label>
+					<form action='/products/sort_by' method='post'> 
+					   <label for="sorts">Sort By:</label>
 					   <select class="form-control" id="sorts">
- 							  <option>Price</option>
-							  <option>Most Popular</option>
+ 							  <option name='price'>Price</option>
+							  <option name='popular'><a href='/products/customers/carts'>Most Popular</a></option>
 						</select>
+					</form>
 				</div>
 
 				<!--displays all the picures of all our products-->
-		
-				<?php 
-					if(!empty($offers[0]["product_id"]))
-					{
-					foreach ($offers as $offer) { ?>
+				<?php $this->load->view('partials/products_main') ?> 
 
-					<div class="col-sm-2 products">
-						<a href="/products/<?=$offer['product_id']?>"><img src="/assets/images/hat_poker.jpg"/></a>
-						<p><?= $offer['product_name'] ?> for  $<?= $offer['price'] ?></p>
-					</div>
-				<?php } ?> 
-					<?php } ?>
 					<!--pagination-->
-					<div class="col-sm-6 links ">
+					<div class="col-sm-12 links ">
 						<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
 					</div>
 			</div>
