@@ -36,3 +36,9 @@ label{
 .navleft{
 	border: 2px solid black;
 }
+
+div.col-sm-2.products{
+	height: 150px;
+	width:150px;
+	margin:0;
+}

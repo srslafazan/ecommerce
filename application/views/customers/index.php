@@ -11,10 +11,10 @@
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  </head>
- <body>	
+ <body>
  	<?php $this->load->view('partials/header'); ?>
- 	<div class="container">
-		 <div class="row">
+ 	<div class="container-fluid">
+		 <div class="row-fluid">
 		<!-- left side column where user can search for a product and click links that will display particular products-->
 		<div class="col-sm-3 navleft">
 
@@ -54,12 +54,18 @@
  							  <option name='price' value='price'>Price</option>
 							  <option name='popular' value='popular'>Most Popular</option>
 						</select>
+						<input type='hidden' name='category' value="<?= (string)$offers['browse'][0] ?>">
+						<input type='hidden' name='search' value="<?= $offers['browse'][1] ?>">
+						<input type='hidden' name='page' value="<?= (string)$offers['browse'][2] ?>">
+
 						<input type='submit' value='Sort Products'>
 					</form>
 				</div>
 
+				<div id='products_main'>
 				<!--displays all the picures of all our products-->
 				<?php $this->load->view('partials/products_main') ?> 
+				</div>
 
 				<!--pagination-->
 				<div class="col-sm-12 links ">
