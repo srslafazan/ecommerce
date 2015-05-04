@@ -5,10 +5,7 @@ class Admin extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-
-        $this->load->model('Product');
-
-        // $this->output->enable_profiler();
+        $this->load->model('Admin');
 
     }
 
@@ -17,7 +14,8 @@ class Admin extends CI_Controller {
         $this->load->view('admin/signins');
     }
     
-    public function orders(){
+    public function orders()
+    {
         $this->load->view('admin/orders');
     }
     
@@ -26,9 +24,18 @@ class Admin extends CI_Controller {
         $this->load->view('admin/show');
     }
 
-    public function products()
-    {
+    public function products_index(){
         $this->load->view('admin/products');
+        $this->load_products_dashboard(0, 0, '');
+    }
+
+    public function load_products_dashboard($category, $page, $search)
+    {
+        $return = $this->Admin->get_products();
+        $products['products'] = $return[0];
+        $products['browse'] = $return[1];
+        
+        $this->load->view('admin/products',);
     }
 
     public function edit_product()

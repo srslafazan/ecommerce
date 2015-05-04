@@ -39,7 +39,7 @@ class Product extends CI_Model {
 					LIMIT ?,15"; 
 		
 		$values = $this->values($category, $search, $page);
-		
+
 		return array($this->db->query($query, $values) -> result_array(), $values);
     }
 
@@ -63,7 +63,7 @@ class Product extends CI_Model {
 
 		$values = $this->values($category, $search, $page);
 
-		return $this->db->query($query, $values)->result_array();
+		return array($this->db->query($query, $values) -> result_array(), $values);
     }
 }
 
