@@ -8,30 +8,30 @@
     <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/bootstrap/js/bootstrap.min.js">
-    <link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/product_page.css">
 </head>
 <body>
 <!-- nav -->
 <?php $this->load->view('partials/header'); ?>
     <div class='container'>
-
-        <a href='/'>Go Back</a>
-        <div id='product_main'>
-            <div>
-                <h2>Black Belt for Staff</h2>
-                <img src='#' alt='product image'>
+        <a class="header" href='/'>Go Back</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <h2 class="header">Black Belt for Staff</h2>
+                <img id="big_pic" src='#' alt='product image'>
                 <div class='thumbnails'>
-                    <img src='#' alt='product thumbnail'>
-                    <img src='#' alt='product thumbnail'>
-                    <img src='#' alt='product thumbnail'>
-                    <img src='#' alt='product thumbnail'>
-                    <img src='#' alt='product thumbnail'>
+                    <img id="first" class="prod_thumbnails" src='#' alt='product thumbnail'>
+                    <img class="prod_thumbnails" src='#' alt='product thumbnail'>
+                    <img class="prod_thumbnails" src='#' alt='product thumbnail'>
+                    <img class="prod_thumbnails" src='#' alt='product thumbnail'>
+                    <img class="prod_thumbnails" src='#' alt='product thumbnail'>
                 </div>
             </div>
+    
 
-            <div>
-                <p>
+        <div class="col-md-6 description">
+                <p class>
                 Description...Description...Description...Description...Description...
                 Description...Description...Description...Description...Description...
                 Description...Description...Description...Description...Description...
@@ -53,57 +53,66 @@
                 Description...Description...Description...Description...Description...
                 Description...Description...Description...Description...Description...
                 </p>
-                <form>
-                    <select>
-                        <option>1 #price#</option>
-                        <option>2 #price#</option>
-                        <option>3 #price#</option>
-                    </select>
-                    <input type='submit' value='buy'>
-                </form>
-            </div>
-
         </div>
+    </div>
 
-        <div>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
+    <div class="row">
+        <div class="col-sm-offset-8 col-sm-3">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="quantity" class="col-sm-2 control-label">Buy</label>
+                    <div class="col-sm-7">
+                         <select class="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                        </select>
+                    </div>
+                </div>
             </form>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
-            </form>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
-            </form>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
-            </form>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
-            </form>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
-            </form>
-            <form class='products'>
-                <a href='#'><img src='#' alt='products'></a>
-                <div>price overlay</div>
-                <p>Product name</p>
-            </form>
+         </div>
+    </div>
+    
 
-        </div>
-
+        
+    <div class="row">
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
+            <form class='products'>
+                <a href='#'><img src='#' alt='products'></a>
+                <div>price overlay</div>
+                <p>Product name</p>
+            </form>
     </div>
 </body>
 </html>

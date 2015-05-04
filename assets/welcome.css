@@ -1,3 +1,4 @@
+/*CSS for the index page of the website*/
 .menu{
 	border: 2px solid black;
 	margin-right: 20px;
@@ -6,30 +7,21 @@
 .photos{
 	border: 2px solid black;
 }
-
-img{
-	height:70px;
-	width:70px;
-	margin-left: 17px;
+ 
+/*size of our div for each product*/
+.products{
+	width:19.6%;
 }
 
-.products{
-	/*margin: 10px;*/
-	width: 150px;
-	height: 150px;
+/*specifies the height and width of each image on our page*/
+img{
+	width:100px;
+	height: 100px;
 }
 
 .links {
 	margin-top: 22px;
 	display:block;
-}
-
-#first_link {
-	margin-left: 190px;
-}
-
-p{
-	display: inline-block;
 }
 
 .display{

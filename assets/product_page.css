@@ -1,0 +1,41 @@
+.description {
+	margin-top:40px;
+}
+
+#big_pic {
+	height: 200px;
+	width:325px;
+	margin-left: 46px;
+}
+
+
+#first_link {
+	margin-left: 190px;
+}
+
+.thumbnails{
+	width: 325px;
+	display: inline-block;	
+}
+
+.prod_thumbnails{
+	width: 43px;
+	height: 57px;
+	margin-left: 5px;
+}
+
+.header{
+	padding-left: 27px;
+}
+
+#first{
+	margin-left: 74px;
+}
+
+.products{
+	/*margin: 10px;*/
+	width: 150px;
+	height: 150px;
+	display:inline-block;
+	margin-top: 10px;
+}
