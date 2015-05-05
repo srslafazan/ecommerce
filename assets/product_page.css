@@ -16,6 +16,8 @@
 .thumbnails{
 	width: 325px;
 	display: inline-block;	
+	margin-left:65px;
+	margin-top: 15px;
 }
 
 .prod_thumbnails{
@@ -33,9 +35,24 @@
 }
 
 .products{
-	/*margin: 10px;*/
+	margin-top: 20px;
 	width: 150px;
 	height: 150px;
 	display:inline-block;
 	margin-top: 10px;
+
+}
+
+.similar_item{
+	width:100px;
+	height:100px;
+	margin-top:25px;
+}
+
+.other_items{
+	margin-left:20px;
+}
+
+.products_show {
+	margin-top: 60px;
 }
