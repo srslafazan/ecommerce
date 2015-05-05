@@ -47,15 +47,16 @@ class Products extends CI_Controller {
         $this->load_home($category, $page, $search);
     }
 
-    public function product_view($id)
-    {
-        $this->load->view('customers/shows', array('id' => $id));
+    public function show($id)
+    {   
+        $data['products'] = $this->Product->get_product_by_id($id);
+        $data['similars'] = $this->Product->all_products_images();
+        $this->load->view('customers/shows', $data);
     }
 
     public function sort_by() 
     {
         $post = $this->input->post();
-
         $category = $post['category'];
         $page = $post['page'];
         $search = $post['search'];

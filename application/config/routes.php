@@ -6,6 +6,7 @@ $route['404_override'] = '';
 // end of main routes
 
 
+
 // customer routes
 $route['products/show/(:any)'] = 'products/product_view/$1';
 $route['products/browse'] = 'products/get_product';

@@ -16,7 +16,16 @@ class Admins extends CI_Controller {
     
     public function orders()
     {
-        $this->load->view('admins/orders');
+        $this->load_orders_dashboard(0,'', 0);
+    }
+
+    public function load_orders_dashboard($category, $search, $page)
+    {
+        $return = $this->Admin->get_orders($category, $search, $page);
+        $orders['orders']['orders'] = $return[0];
+        $orders['orders']['browse'] = $return[1];
+
+        $this->load->view('admins/orders', $orders);
     }
     
     public function show_order()
@@ -26,12 +35,12 @@ class Admins extends CI_Controller {
 
     public function products()
     {
-        $this->load_products_dashboard(0, 0, '');
+        $this->load_products_dashboard(0,'', 0);
     }
 
-    public function load_products_dashboard($category, $page, $search)
+    public function load_products_dashboard($category, $search, $page)
     {
-        $return = $this->Admin->get_products($category, $page, $search);
+        $return = $this->Admin->get_products($category, $search, $page);
         $products['products']['products'] = $return[0];
         $products['products']['browse'] = $return[1];
 

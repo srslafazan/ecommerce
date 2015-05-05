@@ -77,7 +77,40 @@ class Product extends CI_Model {
 
 		return array($this->db->query($query, $values) -> result_array(), $values);
     }
+
+    public function get_product_by_id($id)
+    {
+    	$query = "SELECT products.*, images.*
+					FROM images
+					LEFT JOIN products
+					ON products.id = images.product_id
+					WHERE products.id = ?";
+
+		$values = $id;
+
+		return $this->db->query($query, $values) -> result_array();
+
+	}
+
+	public function all_products_images()
+	{
+		$query = "SELECT products.*, images.*
+				  FROM Products
+				  LEFT JOIN images
+                  ON products.id = images.product_id
+                  ORDER BY rand()
+                  LIMIT 0,5";
+
+       	return $this->db->query($query) -> result_array();
+	}
 }
 
 
 //end of main controller
+
+
+
+
+
+
+
