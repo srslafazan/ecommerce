@@ -35,7 +35,7 @@
 	</style>
  </head>
  <body>	
- <?php var_dump($orders) ?>
+
  	<?php $this->load->view('partials/header_red'); ?>
  	<div class="container">
 	
@@ -68,62 +68,23 @@
 					<th>Total</th>
 					<th>Status</th>
 				</thead>
+<?php  	foreach ($orders['orders'] as $order) { ?>
 				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
+					<td><a href="/admins/show_order/<?= $order['order_id'] ?>"><?= $order['order_id'] ?></td>
+					<td><?= $order['customer_name'] ?></td>
+					<td><?= $order['order_date'] ?></td>
+					<td><?= $order['billing_address'] ?></td>
+					<td>$$$$$</td>
 					<td>
 						<select name='status' class='form-control'>
+							<option value='<?= $order['status'] ?>'>Shipped</option>
 							<option value='shipped'>Shipped</option>
 							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
+							<option value='3'>Cancelled</option>
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
+<?php } ?>				
 			</table>
 			<!--pagination-->
 			<div class="page">
