@@ -22,8 +22,8 @@
 
 	<script type='text/javascript'>
 
-
 	</script>
+
 	<style type="text/css">
 		.filter{
 			display: inline-block;
@@ -32,10 +32,10 @@
 		.page{
 			text-align: center;
 		}
-	
 	</style>
  </head>
  <body>	
+ <?php var_dump($orders) ?>
  	<?php $this->load->view('partials/header_red'); ?>
  	<div class="container">
 	
