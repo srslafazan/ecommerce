@@ -13,7 +13,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add a new product</h4>
+        
+
       </div>
       <form class="form-horizontal">
         <div class="modal-body">
@@ -82,7 +83,7 @@
         </div>  <!-- end of modal body -->
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-success">Preview</button>
+          <a type="button" target='_blank' class="btn btn-success" href='/admins'>Preview</a>
           <button type="button" class="btn btn-primary">Update</button>
         </div> <!-- end of footer -->
       </form>

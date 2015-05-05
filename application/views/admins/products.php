@@ -28,9 +28,19 @@
 		}
 
     </style>
+    <script type="text/javascript">
+    	$(document).on("click", ".update", function(){
+    		console.log("made it!")
+    		var id = $(this).data('id');
+    		var html_str = "<h4 class='modal-title' id='myModalLabel'>Edit product - ID " + id + " </h4>";
+    		$('.modal-header').html(html_str);
+    		$('#myModal').modal('show');
+    	})
+
+    </script>
 </head>
 <body>	
-<?php var_dump($products); ?>
+
  	<?php $this->load->view('partials/header_red'); ?>
  <?php $this->load->view('partials/new_product'); ?>
  	
@@ -65,62 +75,27 @@
 					<th>Quantity Sold</th>
 					<th>action</th>
 				</thead>
+<?php  	foreach ($products['products'] as $product) 
+		{ ?>
 				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
+					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'></td>
+					<td><?= $product['id'] ?></td>
+					<td><?= $product['name'] ?></td>
+					<td><?= $product['inventory'] ?></td>
+					<td><?= $product['id'] ?></td>
+					<td> <a target=''  data-toggle="modal" data-target="" data-action="Edit a"
+						data-id="<?= $product['id']?>" class='update'>edit</a> | 
+					<a href="">delete</a> </td>
 				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>	
+<?php	}	?>
 			</table>
 
 <!-- =============================pagination ==========================================-->
 
 			<div class='page'>
 				<a href="#" >1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> |
-				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | <a href="#">9</a> | 
-				<a href="#">10</a> | <a href="#">-></a>
+				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | 
+				<a href="#">9</a> | <a href="#">10</a> | <a href="#">-></a>
 			</div>  <!-- end of pagination -->
 
 		</div>  <!-- end of show products -->
