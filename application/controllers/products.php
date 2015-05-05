@@ -17,6 +17,7 @@ class Products extends CI_Controller {
 
     public function load_home($category, $page, $search){
         
+
         $return = $this->Product->get_products($category, $page, $search);
         $offers['offers']['products'] = $return[0];
         $offers['offers']['browse'] = $return[1];
@@ -39,7 +40,7 @@ class Products extends CI_Controller {
     {
         $category = 0;
         $page = 0;
-        $search = $this->input->post();
+        $search = $this->input->post('search');
 
         $offers['offers']['category_title'] = "Products like " . $this->input->post('search') . ":";
         
@@ -51,21 +52,28 @@ class Products extends CI_Controller {
         $data['products'] = $this->Product->get_product_by_id($id);
         $data['similars'] = $this->Product->all_products_images();
         $this->load->view('customers/shows', $data);
-
-
     }
 
+    public function sort_by() 
+    {
+        $post = $this->input->post();
+        $category = $post['category'];
+        $page = $post['page'];
+        $search = $post['search'];
+        
+        if($post['sort'] == 'popular'){
+            $this->session->set_userdata('products_sort', 'popular');
+        } else {
+            $this->session->set_userdata('products_sort', 'price');
+        }
 
-
-    public function get_products_popular (){
-
-
+        $this->load_home($category, $page, $search);
     }
 
-    public function sort_by() {
-
+    public function view_carts() 
+    {
+        $this->load->view('customers/carts');
     }
-
 }
 
 
