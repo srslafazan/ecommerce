@@ -21,7 +21,7 @@
 <body>
 <!-- nav -->
 <?php $this->load->view('partials/header');?>
-
+<?php var_dump($products) ?>
     <div class='container'>
         <a class="header" href='/'>Go Back</a>
         <div class="row">
@@ -44,7 +44,7 @@
 
     <div class="row">
         <div class="col-sm-offset-8 col-sm-3">
-            <form class="form-horizontal">
+            <form action='' method='post' class="form-horizontal">
                 <div class="form-group">
                     <label for="quantity" class="col-sm-2 control-label">Buy</label>
                     <div class="col-sm-7">
