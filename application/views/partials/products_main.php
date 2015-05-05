@@ -10,7 +10,6 @@
                     {
                         echo $product['product_name'] . ' for $' . $product['price']; 
                     } ?>
-
             </p>
         </div>
  

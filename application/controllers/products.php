@@ -7,6 +7,7 @@ class Products extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Product');
+        // $this->load->library('session');
     }
 
     public function index()
@@ -51,6 +52,7 @@ class Products extends CI_Controller {
     {   
         $data['products'] = $this->Product->get_product_by_id($id);
         $data['similars'] = $this->Product->all_products_images();
+
         $this->load->view('customers/shows', $data);
     }
 
@@ -74,6 +76,7 @@ class Products extends CI_Controller {
     {
         $this->load->view('customers/carts');
     }
+
 }
 
 

@@ -87,7 +87,7 @@ class Product extends CI_Model {
 					WHERE products.id = ?";
 
 		$values = $id;
-
+		
 		return $this->db->query($query, $values) -> result_array();
 
 	}
