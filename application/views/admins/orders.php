@@ -22,7 +22,7 @@
 
 	<script type='text/javascript'>
 		$(document).ready(function(){
-			
+
 
 // end of jQuery
 		});
@@ -39,7 +39,6 @@
 	</style>
  </head>
  <body>	
-
  	<?php $this->load->view('partials/header_red'); ?>
  	<div class="container">
 	
