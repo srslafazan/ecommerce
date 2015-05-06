@@ -93,19 +93,19 @@
 					</tr>
 						<tr>
 						<td>Address</td>
-						<td><?= $customer['street'] ?></td>
+						<td><?= $customer['billing_street'] ?></td>
 					</tr>
 						<tr>
 						<td>City</td>
-						<td><?= $customer['city'] ?></td>
+						<td><?= $customer['billing_city'] ?></td>
 					</tr>
 						<tr>
 						<td>State</td>
-						<td><?= $customer['state'] ?></td>
+						<td><?= $customer['billing_state'] ?></td>
 					</tr>
 						<tr>
 						<td>Zip</td>
-						<td><?= $customer['zipcode'] ?></td>
+						<td><?= $customer['billing_zipcode'] ?></td>
 					</tr>
 				</table>
 			</div>  <!-- end of sidebar -->
