@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 <!-- jquery cdns -->	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -22,7 +22,7 @@
 
 	<script type='text/javascript'>
 		$(document).ready(function(){
-
+			
 
 // end of jQuery
 		});
@@ -46,7 +46,7 @@
 	 
 			<div class="row">
 		    	<form role="form" class='filter'>
-		    		<div class="form group has-feeback has-feedback-left ">		  	
+		    		<div class="form group has-feedback has-feedback-left ">		  	
 			    		<input type='text' name='search'  class='search form-control' placeholder='search'/>
 		    		</div>
 		    	</form> 
@@ -91,11 +91,11 @@
 			</table>
 
 <!--pagination-->
-			<div class="page">
+<!-- 			<div class="page">
 				<a href="#" id="first_link">1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> |
 				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | <a href="#">9</a> | 
 				<a href="#">10</a> | <a href="#">-></a>
-			</div>
+			</div> -->
 
 		</div>
 <!-- end of container -->

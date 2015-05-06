@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-sm-offset-10 col-sm-2">
                     <p>Your Total: $<strong><?php echo $total ?></strong></p>
-                    <form class="form-inline" action="products/index" method="post">
+                    <form class="form-inline" action="/" method="post">
                          <button type="submit" class="btn btn-success">Keep Shopping</button>
                     </form>
                 </div>
