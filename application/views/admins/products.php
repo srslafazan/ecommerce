@@ -34,40 +34,49 @@
     </style>
 
     <script type="text/javascript">
+
+    // ===========================load modals==========================
     	$(document).on("click", ".update", function()
     	{
     		var id = $(this).data('id');
-        	var url = "/admins/edit_product/"+id;
-        	$.get(url, function(res){
+    		var action = $(this).data('action');
+    		console.log(action);
+    		if(action === 'edit'){
+	        	var url = "/admins/edit_product/"+id;
+	        	$.get(url, function(res){
+	        		$('#body').html(res);
+	  		 	});
+	          	$('#product').modal('show');
+          }
+          if(action === "add"){
+          		$.get("/admins/add", function(res){
         		$('#body').html(res);
   		 	});
           	$('#product').modal('show');
-       	});
-
-       	$(document).on("click", "#new_product", function()
-    	{
-        	$.get("/admins/add", function(res){
-        		$('#body').html(res);
-  		 	});
-          	$('#product').modal('show');
-       	});
-
-       	$(document).on("click", ".delete", function()
-    	{
-    		var id = $(this).data('id');
+          }
+          if(action === 'delete'){
+          	var id = $(this).data('id');
         	$.get("/admins/delete/"+id, function(res){
         		$('#body').html(res);
   		 	});
           	$('#product').modal('show');
+          }
+       	
        	});
+       	
+//=====================manage products ===============================
 
        	$(document).on("click", ".prod_button", function(){
        		if($(this).attr('value') === 'Preview'){
        			$('#edit_form').attr('target','_blank');
-       			$('#edit_form').attr('action', '/admins/preview_product');
+       			$('#edit_form').attr('action', '/admins/preview');
        		}
-       		else if($(this).attr('value') === ''){
-       			$('#edit_form').attr('action','/admins/preview');
+       		else if($(this).attr('value') === 'Update'){
+       			$('#edit_form').attr('action','/admins/update');
+       			$('#edit_form').attr('target','');
+       		}
+       		else if($(this).attr('value') === 'Add Product'){
+       			$('#edit_form').attr('action','/admins/create');
        			$('#edit_form').attr('target','');
        		}
        	});
@@ -90,7 +99,7 @@
 	    		</div>
 	    	</form> 
 	    	<form class='pull-right filter' action='' method='post'>
-	    		<button type="button" class="btn btn-success"  id="new_product">
+	    		<button type="button" class="btn btn-success update"   data-action="add">
   					Add new product 
 				</button>
 				<?php $this->session->set_flashdata('edit', '5'); ?>
@@ -119,8 +128,8 @@
 					<td><?= $product['inventory'] ?></td>
 					<td><?= $product['id'] ?></td>
 					<td> <a  data-toggle="modal" data-target="" 
-						 data-id="<?= $product['id']?>" class='update'>edit</a> | 
-					<a data-id="<?= $product['id']?>" class='delete' >delete</a> </td>
+						 data-id="<?= $product['id']?>" data-action="edit" class='update'>edit</a> | 
+					<a data-id="<?= $product['id']?>" data-action="delete" class='update' >delete</a> </td>
 				</tr>
 <?php	}	?>
 			</table>

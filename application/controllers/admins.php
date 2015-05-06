@@ -47,9 +47,9 @@ class Admins extends CI_Controller {
         $products['products']['products'] = $return[0];
         $products['products']['browse'] = $return[1];
         $this->load->view('admins/products', $products);
-
- 
     }
+
+//=============load product management Modals ========================
 
     public function add()
     {
@@ -64,35 +64,44 @@ class Admins extends CI_Controller {
         $this->load->view('partials/edit_product', $data);
     }
 
-    public function edit()
-    {
-        var_dump($this->input->post());
-    }
-
-    public function preview_product()
-    {
-        $data['product'] = $this->input->post();
-        $this->load->view('/admins/preview', $data);
-    }
-
-    public function preview()
-    {
-        $data = array(
-            'product' => $this->input->post()
-            );
-        
-        $this->load->view('admins/preview', $data);
-    }
-
     public function delete($id)
     {
         $data['product'] = $this->Admin->preview_product($id);
         $this->load->view('partials/delete', $data);
     }
 
+//=============================Manage products ==========================
+    public function update()
+    {
+         $data['product'] = $this->input->post();
+         $this->Admin->update($data);
+    }
+
+    public function preview()
+    {
+        $data['product'] = $this->input->post();
+        $this->load->view('/admins/preview', $data);
+    }
+
     public function destroy()
     {
-    
+        $id =  $this->input->post('id');
+        $this->Admin->destroy($id);
+    }
+
+    public function create()
+    {
+        $product = $this->input->post();
+        if($this->input->post('new_category'))
+        {
+            echo 'hi';
+            $id = $this->Admin->add_cat($this->input->post('new_category'));
+        }
+        die();
+
+          $product = $this->input->post();
+        $this->Admin->create($product);
+        $this->products();
     }
 }
 

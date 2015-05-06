@@ -123,6 +123,44 @@ class Admin extends CI_Model {
         return $customer_data;
     }
 
+    public function update($prduct){
+
+
+    }
+
+    public function destroy()
+    {
+        $query = "SELECT products.*, product_orders.*, product_categories.*, images.* 
+        FROM products LEFT JOIN product_orders ON product_orders.product_id = products.id
+        LEFT JOIN product_categories on product_categories.product_id  = products.id 
+        LEFT JOIN images ON images.product_id = products.id
+        WHERE products.id = 1
+            ";
+    }
+
+    public function create($product)
+    {
+
+        $product = array($product['name'], $product['description'],
+                    $price = $product['price']);
+        $query = "INSERT INTO products (name, description, price)
+                    VALUES (?,?,?)";
+        $this->db->query($query, $product);
+
+    }
+
+    public function add_cat($cat)
+    {
+        $query = "SELECT id FROM categories WHERE name = ?";
+        $id = $this->db->$query($query, $cat);
+        if(!$id)
+        {
+            $query = "INSERT INTO categories (name) VALUES (?)";
+            $id =  $query = "SELECT id FROM categories WHERE name = ?";
+        }
+        return $id;
+    }
+
     
 
 
