@@ -107,9 +107,12 @@ class Admin extends CI_Model {
         $order = $this->db->query($order_query)->result_array();
 
         $customer_query = "SELECT CONCAT(customers.first_name,' ',customers.last_name) AS name,  addresses.street, 
-                                    addresses.city, addresses.state, addresses.zipcode
+                                    addresses.city, addresses.state, addresses.zipcode, billing_address.street AS billing_street, 
+                                    billing_address.city AS billing_city, billing_address.state AS billing_state, 
+                                    billing_address.zipcode AS billing_zipcode
                                     FROM orders LEFT JOIN customers ON orders.user_id = customers.id
                                     LEFT JOIN addresses ON customers.address_id = addresses.id
+                                    LEFT JOIN addresses AS billing_address ON billing_address.id = customers.billing_id
                                     WHERE orders.id=".$id;
         $customer =  $this->db->query($customer_query)->row_array();
         
