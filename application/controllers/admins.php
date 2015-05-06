@@ -16,16 +16,21 @@ class Admins extends CI_Controller {
     
     public function orders()
     {
-        $this->load_orders_dashboard(0,'', 0);
+        $data = $this->Admin->get_orders();
+        $this->load->view('admins/orders', $data);
     }
 
-    public function load_orders_dashboard($category, $search, $page)
+    public function orders_main()
     {
-        $return = $this->Admin->get_orders($category, $search, $page);
-        $orders['orders']['orders'] = $return[0];
-        $orders['orders']['browse'] = $return[1];
+        $data = $this->Admin->get_orders();
+        $this->load->view('partials/orders_main', $data);
+    }
 
-        $this->load->view('admins/orders', $orders);
+    public function load_orders_main()
+    {
+        $post = $this->input->post();
+        $data = $this->Admin->get_orders( $post['search'], $post['page'], $post['sort']);
+        $this->load->view('partials/orders_main', $data);
     }
 
 // ==================individidual order page ==========================
