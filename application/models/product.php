@@ -49,7 +49,6 @@ class Product extends CI_Model {
 
 			$query = "	SELECT products.id, products.name as product_name, products.description as product_description, 
 						products.price as price, categories.id as category_id, categories.name as category from products
-
 						LEFT JOIN product_categories 
 						ON product_categories.product_id = products.id
 						LEFT JOIN categories

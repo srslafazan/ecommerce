@@ -16,14 +16,19 @@
 .thumbnails{
 	width: 325px;
 	display: inline-block;	
-	margin-left:65px;
+	margin-left:77px;
 	margin-top: 15px;
 }
 
 .prod_thumbnails{
+	display: inline-block;
 	width: 43px;
 	height: 57px;
 	margin-left: 5px;
+}
+
+.thumbnail_img{
+	display: inline-block;
 }
 
 .header{
@@ -43,16 +48,42 @@
 
 }
 
-.similar_item{
-	width:100px;
-	height:100px;
-	margin-top:25px;
+form{
+	margin-top: 1em;
+	margin-left: 6em;
 }
 
 .other_items{
-	margin-left:20px;
+	margin-left:60px;
+	width:167px;
+	height:100px;
+	margin-top:25px;
+	display: inline-block;
 }
 
-.products_show {
-	margin-top: 60px;
+.prod_thumbnails_similar {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
 }
+
+
+.products_show {
+	margin-top: 80px;
+}
+
+
+p{
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+
+.see_more{
+	margin-left: 100px;
+	-webkit-margin-before: 1em;
+ 	 -webkit-margin-after: 0em;
+}
+
+
+
+
