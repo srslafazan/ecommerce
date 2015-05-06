@@ -3,8 +3,10 @@
 	<title>Orders</title>
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<!-- Optional theme -->
@@ -15,7 +17,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  	
  	<!-- jquery cdn -->
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
  	
  	<!-- local stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
@@ -45,11 +47,13 @@
 
 	</style>
  </head>
+  	<?php $this->load->view('partials/header_red'); ?>
  <body>	
- 	<?php $this->load->view('partials/header_red'); ?>
+
+
  	<div class="container-fluid">			
 		<div class="row-fluid">
-
+	
 <!-- ========================= Customer Information============================== -->
 
 			<div class="col-sm-3 customer_info">
@@ -61,23 +65,23 @@
 					</thead>
 					<tr>
 						<td>Name</td>
-						<td>Bob</td>
+						<td><?= $customer['name'] ?></td>
 					</tr>
 						<tr>
 						<td>Address</td>
-						<td>123 Dojo Way</td>
+						<td><?= $customer['street'] ?></td>
 					</tr>
 						<tr>
 						<td>City</td>
-						<td>Seattle</td>
+						<td><?= $customer['city'] ?></td>
 					</tr>
 						<tr>
 						<td>State</td>
-						<td>WA</td>
+						<td><?= $customer['state'] ?></td>
 					</tr>
 						<tr>
 						<td>Zip</td>
-						<td>98133</td>
+						<td><?= $customer['zipcode'] ?></td>
 					</tr>
 				</table>
 				<table class='table table-striped'>
@@ -86,23 +90,23 @@
 					</thead>
 					<tr>
 						<td>Name</td>
-						<td>Bob</td>
+						<td><?= $customer['name'] ?></td>
 					</tr>
 						<tr>
 						<td>Address</td>
-						<td>123 Dojo Way</td>
+						<td><?= $customer['street'] ?></td>
 					</tr>
 						<tr>
 						<td>City</td>
-						<td>Seattle</td>
+						<td><?= $customer['city'] ?></td>
 					</tr>
 						<tr>
 						<td>State</td>
-						<td>WA</td>
+						<td><?= $customer['state'] ?></td>
 					</tr>
 						<tr>
 						<td>Zip</td>
-						<td>98133</td>
+						<td><?= $customer['zipcode'] ?></td>
 					</tr>
 				</table>
 			</div>  <!-- end of sidebar -->
@@ -119,30 +123,28 @@
 							<th>Quantity</th>
 							<th>Total</th>
 						</thead>
+<?php  			$sub_total = 0;
+				foreach ($orders as $order) {  ?>
 						<tr>
-							<td>35</td>
-							<td>cup</td>
-							<td>$9.99</td>
-							<td>1</td>
-							<td>$9.99</td>
+							<td><?= $order['id'] ?></td>
+							<td><?= $order['name'] ?></td>
+							<td>$<?= $order['price'] ?></td>
+							<td><?= $order['quantity'] ?></td>
+<?php			$sub_total += $order['total']; 									?>
+							<td>$<?= $order['total'] ?></td>
 						</tr>
-							<tr>
-							<td>215</td>
-							<td>shirt</td>
-							<td>$19.99</td>
-							<td>2</td>
-							<td>$39.98</td>
-						</tr>
+<?php 		}		?>
 					</table>
 				</div>
 				<div class='row'> <!-- status and shipped -->
 					<div class='col-sm-4 status'>
-						<p>Status: shipped</p>
+						<h4>Status: <?= $order['status'] ?></h4>
 					</div>	
 					<div class='col-sm-5 pull-right total'>
-						<p>Sub total: $49.97</p>
-						<p>Shipping: $1.00</p>
-						<p>Total Price: $50.97</p>
+						<p>Sub total: $<?= $sub_total ?></p>
+<?php $shipping = rand(1, 100) ?>						
+						<p>Shipping: $<?= $shipping ?></p>
+						<p>Total Price: $<?= $sub_total + $shipping ?></p>
 					</div>
 				</div><!-- end of status and shipped -->
 			</div> <!-- end of order-info -->

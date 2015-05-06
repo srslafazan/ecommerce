@@ -4,7 +4,9 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<!-- Optional theme -->
@@ -15,7 +17,6 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  	
  	<!-- jquery cdn -->
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
  	
  	<!-- local stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
@@ -74,7 +75,7 @@
 					<td><?= $order['customer_name'] ?></td>
 					<td><?= $order['order_date'] ?></td>
 					<td><?= $order['billing_address'] ?></td>
-					<td>$$$$$</td>
+					<td>$<?= $order['total'] ?></td>
 					<td>
 						<select name='status' class='form-control'>
 							<option value='<?= $order['status'] ?>'>Shipped</option>
