@@ -1,6 +1,6 @@
 /* Javascript for the product details page, linked from the index page*/
 $(document).ready(function (){
-    
+
     $('.thumbnail_img').click(function(){
         // var src = $('#big_pic').attr('src');
         $('#big_pic').attr('src',$(this).children('img').attr('src'));
@@ -16,8 +16,3 @@ $(document).ready(function (){
         // return false;
     });
 });
-
-
-
-
-	

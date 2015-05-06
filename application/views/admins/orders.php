@@ -22,9 +22,25 @@
 
 	<script type='text/javascript'>
 		$(document).ready(function(){
-			
 
-// end of jQuery
+// INITIAL VIEW LOADS	
+			$.get('/admins/orders_main', function(res){
+				$('tbody').html(res);
+			});
+
+// #SORT HANDLERS
+			$(document).on('change', '#sort select', function(){
+				$(this).parent().submit();
+			});
+			$(document).on('submit', '#sort', function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('tbody').html(res);
+				});
+				return false;
+			});
+			
+// END OF JQUERY
 		});
 	</script>
 
@@ -43,59 +59,42 @@
  	<div class="container">
 	
 <!-- ============= Search and filter ==============-->
-	 
 			<div class="row">
 		    	<form role="form" class='filter'>
 		    		<div class="form group has-feedback has-feedback-left ">		  	
 			    		<input type='text' name='search'  class='search form-control' placeholder='search'/>
 		    		</div>
 		    	</form> 
-		    	<form class='pull-right filter'>
-		    		<select name='' class='form-control' >
-		    			<option value='show_all'>Show All</option>
-		    			<option value='show_all'>Order In</option>
-		    			<option value='show_all'>Process</option>
-		    			<option value='show_all'>Shipped</option>
+		    	<form action='/admins/load_orders_main' method='post' class='pull-right filter' id='sort'>
+		    		<select name='sort' class='form-control'>
+		    			<option value='3'>Show All</option>
+		    			<option value='1'>In Process</option>
+		    			<option value='2'>Shipped</option>
 		    		</select>
+		    		<input type='hidden' name='search' value='%'>
+		    		<input type='hidden' name='page' value='0'>
 		    	</form>
 			</div>
 
 <!-- ================= Show products =======================-->
-		<div class='row'>
-			<table class='table table-bordered table-striped'>
-				<thead>
-					<th>Order ID</th>
-					<th>Name</th>
-					<th>Date</th>
-					<th>Billing Address</th>
-					<th>Total</th>
-					<th>Status</th>
-				</thead>
-<?php  	foreach ($orders['orders'] as $order) { ?>
-				<tr>
-					<td><a href="/admins/show_order/<?= $order['order_id'] ?>"><?= $order['order_id'] ?></td>
-					<td><?= $order['customer_name'] ?></td>
-					<td><?= $order['order_date'] ?></td>
-					<td><?= $order['billing_address'] ?></td>
-					<td>$<?= $order['total'] ?></td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='<?= $order['status'] ?>'>Shipped</option>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='3'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
-<?php } ?>				
-			</table>
+<div class='row'>
+    <table class='table table-bordered table-striped'>
+        <thead>
+            <th>Order ID</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Billing Address</th>
+            <th>Total</th>
+            <th>Status</th>
+        </thead>
+
+<!-- ORDERS_MAIN / LOAD_ORDERS_MAIN --> 
+        <tbody>
+
+        </tbody>
+    </table>
 
 <!--pagination-->
-<!-- 			<div class="page">
-				<a href="#" id="first_link">1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> |
-				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | <a href="#">9</a> | 
-				<a href="#">10</a> | <a href="#">-></a>
-			</div> -->
 
 		</div>
 <!-- end of container -->

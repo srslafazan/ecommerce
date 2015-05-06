@@ -23,8 +23,8 @@ class Admin extends CI_Model {
 //================ Get all products for the admin products page =============================
 	public function get_products($category, $search, $page) {
 
-        $query = "  SELECT products.*, categories.name as category, 
-                    SUM(quantity) as quantity, photo_url from products
+        $query = "  SELECT products.*, categories.name AS category, 
+                    SUM(quantity) AS quantity, photo_url from products
 
                     LEFT JOIN product_categories ON product_categories.product_id = products.id
                     LEFT JOIN categories ON product_categories.category_id = categories.id
@@ -41,36 +41,63 @@ class Admin extends CI_Model {
     }
 
 // ==========Get all orders grouped by orders id for admin orders page ============================
-    public function get_orders($search = '%', $page = 0, $sort = 0){
+    public function get_orders($search = '%', $page = 0, $sort = 3){
 
-        $category_input = $category;
-        $search_input = $search;
+        if ($search != '%'){
+            $search_input = '%' . $search . '%';
+        } else {
+            $search_input = $search;
+        }
         $page = 5 * (int)$page;
-        if($sort === 0 ) { $sort = 'All Products'; }
-        
+
+        switch($sort){
+            case 0: $sort_input = '%cancel%';
+            break;
+            case 1: $sort_input = '%process%';
+            break;
+            case 2: $sort_input = '%ship%';
+            break;
+            case 3: $sort_input = '%';
+        }
+
         if(!empty($search_input) && $search_input != '%') { $search_input = "%" . $search_input . "%"; 
             } else { $search_input = "%"; }
 
-        $values = array( $search_input, $page);
+        $values = array( $search_input, $sort_input, $page );
 
-        $query = "  SELECT orders.id as order_id, orders.created_at as order_date, orders.status_id as order_status, 
-                    customers.id as customer_id, CONCAT_WS(' ', customers.first_name, customers.last_name) as customer_name, 
+        $query = "  SELECT orders.id AS order_id, orders.created_at AS order_date, orders.status_id AS order_status, 
+                    customers.id AS customer_id, CONCAT_WS(' ', customers.first_name, customers.lASt_name) AS customer_name, 
                     CONCAT(CONCAT_WS(' ', addresses.street, addresses.city), ', ', addresses.state, ' ', addresses.zipcode) 
-                    as billing_address, sum(products.price * product_orders.quantity) AS total FROM orders
+                    AS billing_address, sum(products.price * product_orders.quantity) AS total, statuses.status FROM orders
 
-                    LEFT JOIN product_orders on product_orders.order_id = orders.id
-                    LEFT JOIN customers on customers.id = orders.user_id
-                    LEFT JOIN addresses on addresses.id = customers.address_id
-                    LEFT JOIN products on products.id = product_orders.product_id
+                    LEFT JOIN product_orders ON product_orders.order_id = orders.id
+                    LEFT JOIN customers ON customers.id = orders.user_id
+                    LEFT JOIN addresses ON addresses.id = customers.address_id
+                    LEFT JOIN products ON products.id = product_orders.product_id
+                    LEFT JOIN statuses ON statuses.id = orders.status_id
                     WHERE customers.first_name
                     OR customers.last_name
                     OR orders.id LIKE ?
+                    AND statuses.status LIKE ?
                     GROUP BY orders.id
-                    LIMIT ?, 5";
+                    LIMIT ?, 5;";
 
-        
+        $countquery = " SELECT COUNT(DISTINCT orders.id) as total_orders FROM orders
 
-        return array($this->db->query( $query, array($values[1], $values[2]) ) -> result_array(), $values);
+                        LEFT JOIN product_orders ON product_orders.order_id = orders.id
+                        LEFT JOIN customers ON customers.id = orders.user_id
+                        LEFT JOIN statuses ON statuses.id = orders.status_id
+                        WHERE customers.first_name
+                        OR customers.last_name
+                        OR orders.id LIKE ?
+                        AND statuses.status LIKE ?";
+
+        $total_orders = $this->db->query( $countquery, array($values[0], $values[1]) )->row_array();
+
+        return array('orders' => $this->db->query( $query, $values ) -> result_array(), 
+            'values' => array('search' => $search, 'page' => $page, 'sort' => $sort ),
+            'total_orders' => $total_orders['total_orders']
+            );
     }
 
 // ================preview product from the add new product or edit product modal=====================
