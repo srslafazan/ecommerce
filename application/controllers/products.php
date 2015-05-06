@@ -7,77 +7,40 @@ class Products extends CI_Controller {
         parent::__construct();
 
         $this->load->model('Product');
-        // $this->load->library('session');
     }
 
     public function index()
     {
-        $offers['offers']['category_title'] = "All Products";
-    	$this->load_home(0, 0, '');
+        $data = $this->Product->get_all_products();
+        $this->load->view('customers/index', $data);
     }
 
-    public function load_home($category, $page, $search){
-        
-
-        $return = $this->Product->get_products($category, $page, $search);
-        $offers['offers']['products'] = $return[0];
-        $offers['offers']['browse'] = $return[1];
-
-        $this->load->view('customers/index', $offers);
-    }
-
-    public function get_product()
+    public function products_main() 
     {
-    	$category = $this->input->post('category');
-    	$page = 0;
-        $search = '';
-        
-        $offers['offers']['category_title'] = $category; 
-
-        $this->load_home($category, $page, $search);
+        $data = $this->Product->get_all_products();
+        $this->load->view('partials/products_main', $data);
     }
 
-    public function product_search()
-    {
-        $category = 0;
-        $page = 0;
-        $search = $this->input->post('search');
-
-        $offers['offers']['category_title'] = "Products like " . $this->input->post('search') . ":";
-        
-        $this->load_home($category, $page, $search);
-    }
-
-    public function show($id)
-    {   
-        $data['products'] = $this->Product->get_product_by_id($id);
-        $data['similars'] = $this->Product->all_products_images();
-
-        $this->load->view('customers/shows', $data);
-    }
-
-    public function sort_by() 
+    public function load_main()
     {
         $post = $this->input->post();
-        $category = $post['category'];
-        $page = $post['page'];
-        $search = $post['search'];
+        $data = $this->Product->get_all_products($post['category'], $post['search'], $post['page'], $post['sort']);
+        $data['no_matches'] = false;
         
-        if($post['sort'] == 'popular'){
-            $this->session->set_userdata('products_sort', 'popular');
-        } else {
-            $this->session->set_userdata('products_sort', 'price');
+        if(empty($data['products']))
+        {
+            $data = $this->Product->get_all_products();
+            $data['no_matches'] = true;
         }
-
-        $this->load_home($category, $page, $search);
+        $this->load->view('partials/products_main', $data);
     }
 
-    public function view_carts() 
+    public function load_browse()
     {
-        $this->load->view('customers/carts');
+        $post = $this->input->post();
+        $data = $this->Product->get_all_products($post['category'], $post['search'], $post['page'], $post['sort']);
+        $this->load->view('partials/browse_sidebar', $data);
     }
-
-}
-
+} 
 
 //end of main controller

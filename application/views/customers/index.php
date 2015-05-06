@@ -5,87 +5,94 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-	<!-- Latest compiled and minified CSS -->
+	
+<!-- jquery cdns -->	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<!-- Optional theme -->
+<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<!-- Latest compiled and minified JavaScript -->
+<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<!-- fontawesome -->
+<!-- fontawesome -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  	
- 	<!-- jquery cdn -->
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
- 	
- 	<!-- local stylesheet -->
+<!-- local stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
 
 	<script type='text/javascript'>
 
+		$(document).ready(function(){
 
+// load initial views, pagination handler
+			$.get('products/products_main', function(res){
+            	$('#products_main').html(res);
+        	});
+
+// product_main sorts handler
+			$('#sorts').on('change', 'select', function(){
+				$(this).parent().submit();
+			});
+
+// product_main search, browse, pagination
+			$(document).on('submit', '#sorts, #search_products, .browse_products', function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('#products_main').html(res);
+					$.post('/products/load_browse', $(this).serialize(), function(res2){ // reset search and browse 
+						$('#browse').html(res2);
+					});
+					return false;
+				});
+				return false;
+			});
+
+// pagination handler
+			$(document).on('click', '.product_page', function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('#products_main').html(res);
+				});
+				return false;
+			});
+
+// end of jquery
+		});
 	</script>
  </head>
- <body>
+ <body>	
  	<?php $this->load->view('partials/header'); ?>
  	<div class="container-fluid">
-		 <div class="row-fluid">
-		<!-- left side column where user can search for a product and click links that will display particular products-->
-		<div class="col-sm-3 navleft">
+		<div class="row-fluid">
 
-<!-- load search/browse bar -->
-
-				<?php 	if (empty($this->session->userdata['search']) || $this->session->userdata['search'] == 'price'){
-							$search = 'partials/search_price';
-						} elseif ($this->session->userdata['search'] == 'popular') {
-							$search = 'partials/search_popular';
-						} 
-						
-						$this->load->view($search); ?>	
+<!-- left side column where user can search for a product and click links that will display particular products-->
+		<div class="col-sm-3 navleft" id='browse'>
+			<?php $this->load->view('partials/browse_sidebar'); ?>
 		</div>
+		
+<!--right side column where the product displays and there is an option to sort by specific actions -->
 			<div class="col-sm-8 photos">
 				<div class="col-sm-12">
-			 <!--right side column where the product displays and there is an option to sort by specific actions -->
-					<div class="col-sm-6" >
+					<div class="col-sm-6"></div>
 
-						<h3>
-						<?php 
-							if(empty($offers['category_title'])){
-								echo "All Products";
-							} else {  echo $offers['category_title']; }
-						?>
-
-						(page 2)</h3>
+<!-- SEARCH/CATEGORY TITLE -->
+					<div class="col-sm-offset-7 col-sm-4 display">
+						<form action='/products/load_main' method='post' id='sorts'> 
+						   	<label for="sorts">Sort By:</label>
+							<input type='hidden' name='category' value="<?= (string)$values['category']; ?>">
+							<input type='hidden' name='search' value="<?= (string)$values['search']; ?>">
+							<input type='hidden' name='page' value="<?= (string)$values['page']; ?>">
+						   	<select class="form-control" name='sort'>
+	 							  <option name='price' value='price'>Price</option>
+								  <option name='popular' value='most_popular'>Most Popular</option>
+							</select>
+						</form>
 					</div>
-					<div class="col-sm-6 links ">
-						<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
-					</div>
 				</div>
 
-				<div class="col-sm-offset-7 col-sm-4 display">
-					<form action='/products/sort_by' method='post'> 
-					   	<label for="sorts">Sort By:</label>
-					   	<select class="form-control" id="sorts" name='sort'>
- 							  <option name='price' value='price'>Price</option>
-							  <option name='popular' value='popular'>Most Popular</option>
-						</select>
-						<input type='hidden' name='category' value="<?= (string)$offers['browse'][0] ?>">
-						<input type='hidden' name='search' value="<?= $offers['browse'][1] ?>">
-						<input type='hidden' name='page' value="<?= (string)$offers['browse'][2] ?>">
-
-						<input type='submit' value='Sort Products'>
-					</form>
-				</div>
-
-				<div id='products_main'>
-				<!--displays all the picures of all our products-->
-				<?php $this->load->view('partials/products_main') ?> 
-				</div>
-
-				<!--pagination-->
-				<div class="col-sm-12 links ">
-					<a href="#" id="first_link">first</a> | <a href="#">prev</a> | <a href="#">2</a> | <a href="#">next</a>
-				</div>
+<!--displays all the picures of all our products-->	
+				<div id='products_main'></div>
 			</div>
 		</div>
 	</div>
