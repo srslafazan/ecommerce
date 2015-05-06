@@ -23,7 +23,6 @@ class Admin extends CI_Model {
 //================ Get all products for the admin products page =============================
 	public function get_products($category, $search, $page) {
 
-
         $query = "  SELECT products.*, categories.name as category, 
                     SUM(quantity) as quantity, photo_url from products
 
@@ -34,7 +33,7 @@ class Admin extends CI_Model {
                     WHERE categories.name OR
                     products.id OR products.name LIKE ?
                     GROUP BY products.id
-                    LIMIT ?, 6";
+                    LIMIT ?, 5";
 
         $values = $this->values($category, $search, $page);
 
@@ -42,7 +41,17 @@ class Admin extends CI_Model {
     }
 
 // ==========Get all orders grouped by orders id for admin orders page ============================
-    public function get_orders($category, $search, $page){
+    public function get_orders($search = '%', $page = 0, $sort = 0){
+
+        $category_input = $category;
+        $search_input = $search;
+        $page = 5 * (int)$page;
+        if($sort === 0 ) { $sort = 'All Products'; }
+        
+        if(!empty($search_input) && $search_input != '%') { $search_input = "%" . $search_input . "%"; 
+            } else { $search_input = "%"; }
+
+        $values = array( $search_input, $page);
 
         $query = "  SELECT orders.id as order_id, orders.created_at as order_date, orders.status_id as order_status, 
                     customers.id as customer_id, CONCAT_WS(' ', customers.first_name, customers.last_name) as customer_name, 
@@ -57,9 +66,9 @@ class Admin extends CI_Model {
                     OR customers.last_name
                     OR orders.id LIKE ?
                     GROUP BY orders.id
-                    LIMIT ?, 6";
+                    LIMIT ?, 5";
 
-        $values = $this->values($category, $search, $page);
+        
 
         return array($this->db->query( $query, array($values[1], $values[2]) ) -> result_array(), $values);
     }
@@ -122,29 +131,4 @@ class Admin extends CI_Model {
             );
         return $customer_data;
     }
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

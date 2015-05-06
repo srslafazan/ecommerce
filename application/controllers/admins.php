@@ -8,7 +8,7 @@ class Admins extends CI_Controller {
         $this->load->model('Admin');
 
     }
-
+//=======================login======================================
     public function index()
     {
         $this->load->view('admins/signins');
@@ -27,6 +27,8 @@ class Admins extends CI_Controller {
 
         $this->load->view('admins/orders', $orders);
     }
+
+// ==================individidual order page ==========================
     
     public function show_order($id)
     {
@@ -52,7 +54,7 @@ class Admins extends CI_Controller {
     public function add()
     {
         $data['categories'] = $this->Admin->categories();
-        $this->load->view('partials/new_product');
+        $this->load->view('partials/new_product', $data);
     }
 
     public function edit_product($id)
@@ -86,6 +88,11 @@ class Admins extends CI_Controller {
     {
         $data['product'] = $this->Admin->preview_product($id);
         $this->load->view('partials/delete', $data);
+    }
+
+    public function destroy()
+    {
+    
     }
 }
 

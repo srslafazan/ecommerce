@@ -20,8 +20,7 @@
 </head>
 <body>
 <!-- nav -->
-<?php $this->load->view('partials/header_red');
-var_dump($product) ?>
+<?php $this->load->view('partials/header_red'); ?>
 
     <div class='container'>
      <!--    <a class="header" href='/'>Go Back</a> -->
@@ -44,22 +43,22 @@ var_dump($product) ?>
     </div>
 
     <div class="row">
-        <div class="col-sm-offset-8 col-sm-3">
-            <form action='' method='post' class="form-horizontal">
-                <div class="form-group">
-                    <label for="quantity" class="col-sm-2 control-label">Buy</label>
-                    <div class="col-sm-7">
-                         <select class="form-control">
-                              <option>1 for $<?= $product['price'] ?></option>
-                              <option>2 for $<?= ($product['price'] * 2)?></option>
-                              <option>3 for $<?= ($product['price'] * 3) ?></option>
-                              <option>4 for $<?= ($product['price'] * 4) ?></option>
-                              <option>5 for $<?= ($product['price'] * 5) ?></option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-         </div>
+      <div class="col-sm-offset-8 col-sm-3">
+        <form action='' method='post' class="form-horizontal">
+          <div class="form-group">
+            <label for="quantity" class="col-sm-2 control-label">Buy</label>
+              <div class="col-sm-7">
+               <select class="form-control">
+                  <option>1 for $<?= $product['price'] ?></option>
+                  <option>2 for $<?= ($product['price'] * 2)?></option>
+                  <option>3 for $<?= ($product['price'] * 3) ?></option>
+                  <option>4 for $<?= ($product['price'] * 4) ?></option>
+                  <option>5 for $<?= ($product['price'] * 5) ?></option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 </body>
 </html>

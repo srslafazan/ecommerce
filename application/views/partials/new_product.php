@@ -24,8 +24,7 @@
           <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Price</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="category" placeholder="Price" name='price'
-              value="<?= $product['price']; ?>">
+              <input type="text" class="form-control" id="category" placeholder="Price" name='price'>
             </div>
           </div>
 <!-- =============================category select================================= -->
@@ -33,7 +32,6 @@
             <label for="category" class="col-sm-4 control-label">Categories</label>
              <div class="col-sm-6">
               <select class="form-control" id='category' name='category'>
-                <option value='<?= $product['category_id'] ?>' ><?= $product['category'] ?></option>
 <?php           for ($i=0; $i < count($categories); $i++) {  ?>
                     <option value='<?=  $categories[$i]['id'] ?>' ><?= $categories[$i]['name']  ?></option>
 <?php            }?>               
@@ -61,7 +59,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <input type="submit"  name='action' class="prod_button btn btn-success" value='Preview'>
-          <input type="submit" name='action' class="prod_button btn btn-primary" value='Update'>
+          <input type="submit" name='action' class="prod_button btn btn-primary" value='Add Product'>
         </div> <!-- end of footer -->
         </div>  <!-- end of modal body -->
       <input type='hidden' name='images_preview' value='<?=$images_preview ?>'>
