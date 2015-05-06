@@ -44,7 +44,7 @@ class Admin extends CI_Model {
 // ==========Get all orders grouped by orders id for admin orders page ============================
     public function get_orders($category, $search, $page){
 
-        $query = "  SELECT orders.id as order_id, orders.created_at as order_date, orders.order_status as order_status, 
+        $query = "  SELECT orders.id as order_id, orders.created_at as order_date, orders.status_id as order_status, 
                     customers.id as customer_id, CONCAT_WS(' ', customers.first_name, customers.last_name) as customer_name, 
                     CONCAT(CONCAT_WS(' ', addresses.street, addresses.city), ', ', addresses.state, ' ', addresses.zipcode) 
                     as billing_address, sum(products.price * product_orders.quantity) AS total FROM orders
@@ -88,6 +88,11 @@ class Admin extends CI_Model {
         return $data;
     }
 
+    public function categories()
+    {
+        $cat_query = "SELECT * FROM categories";
+        return $this->db->query($cat_query) -> result_array();
+    }
 
 // ================gets a single order ID for the single order page ====================================
 
@@ -97,16 +102,17 @@ class Admin extends CI_Model {
                             products.price * product_orders.quantity AS total
                             FROM orders LEFT JOIN product_orders on product_orders.order_id = orders.id
                             LEFT JOIN products ON product_orders.product_id = products.id 
-                            LEFT JOIN statuses ON orders.order_status = statuses.id
+                            LEFT JOIN statuses ON orders.status_id = statuses.id
                             WHERE orders.id = ".$id; 
-
         $order = $this->db->query($order_query)->result_array();
+
         $customer_query = "SELECT CONCAT(customers.first_name,' ',customers.last_name) AS name,  addresses.street, 
                                     addresses.city, addresses.state, addresses.zipcode
                                     FROM orders LEFT JOIN customers ON orders.user_id = customers.id
                                     LEFT JOIN addresses ON customers.address_id = addresses.id
                                     WHERE orders.id=".$id;
         $customer =  $this->db->query($customer_query)->row_array();
+        
         $customer_data = array(
                 'orders' => $order,
                 'customer' => $customer
@@ -114,11 +120,8 @@ class Admin extends CI_Model {
         return $customer_data;
     }
 
-    public function categories()
-    {
-        $cat_query = "SELECT * FROM categories";
-        return $this->db->query($cat_query) -> result_array();
-    }
+    
+
 
 
 

@@ -57,7 +57,6 @@ class Admins extends CI_Controller {
 
     public function edit_product($id)
     {
-        
         $data = $this->Admin->preview_product($id);
         $data['categories'] = $this->Admin->categories();
         $this->load->view('partials/edit_product', $data);
@@ -66,7 +65,6 @@ class Admins extends CI_Controller {
     public function edit()
     {
         var_dump($this->input->post());
-
     }
 
     public function preview_product()
@@ -86,7 +84,8 @@ class Admins extends CI_Controller {
 
     public function delete($id)
     {
-        $this->load->view('partials/delete', $id);
+        $data['product'] = $this->Admin->preview_product($id);
+        $this->load->view('partials/delete', $data);
     }
 }
 
