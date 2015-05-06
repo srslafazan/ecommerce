@@ -5,12 +5,23 @@
     <meta charset="utf-8" />
     <meta name="description" content="This website is using Twitter Bootstrap"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/assets/bootstrap/js/bootstrap.min.js">
+    
+<!-- jquery cdns -->    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!-- fontawesome -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/product_page.css">
-    <script>
+    
+ <!-- local stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
+
+    <script type='text/javascript'>
         $(document).ready(function (){
             $(document).on('click', '#big_pic' function(){
                 $(this).attr('src', "/assets/images/<?= $product['photo_url']  ?>");
