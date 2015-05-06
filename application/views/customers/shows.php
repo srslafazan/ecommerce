@@ -17,40 +17,7 @@ if(!$this->session->userdata('quantity'))
 }
 ?>
 
-<head>
-    <title>##Product Name## | Dojo eCommerce</title>
-    <meta charset="utf-8" />
-    <meta name="description" content="This website is using Twitter Bootstrap"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-<!-- jquery cdns -->    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<!-- fontawesome -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    
- <!-- local stylesheet -->
-    <link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
-
-    <script type='text/javascript'>
-        $(document).ready(function (){
-            $(document).on('click', '#big_pic' function(){
-                $(this).attr('src', "/assets/images/<?= $product['photo_url']  ?>");
-             });
-        });  
-    </script>
-</head>
-<body>
-<!-- nav -->
-<?php $this->load->view('partials/header');?>
-
-    <div class='container'>
+<div class='container'>
         <a class="header" href='/'>Go Back</a>
         <div class="row">
             <div class="col-sm-6">
@@ -96,30 +63,7 @@ if(!$this->session->userdata('quantity'))
             </div>
         </div>
 
-
-
-    <div class="row">
-        <div class="col-sm-offset-8 col-sm-3">
-            <form action='' method='post' class="form-horizontal">
-                <div class="form-group">
-                    <label for="quantity" class="col-sm-2 control-label">Buy</label>
-                    <div class="col-sm-7">
-                         <select class="form-control">
-                              <option>1 for $<?= $products[0]['price'] ?></option>
-                              <option>2 for $<?= ($products[0]['price'] * 2)?></option>
-                              <option>3 for $<?= ($products[0]['price'] * 3) ?></option>
-                              <option>4 for $<?= ($products[0]['price'] * 4) ?></option>
-                              <option>5 for $<?= ($products[0]['price'] * 5) ?></option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-         </div>
-    </div>
     
-
-
-        
     <div class="row products_show">
         <p><strong>You May Also Be Interested In:</strong></p>
         <?php foreach ($similars as $similar) { ?>
