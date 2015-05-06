@@ -8,7 +8,7 @@ $route['404_override'] = '';
 
 
 // customer routes
-$route['products/show/(:any)'] = 'products/product_view/$1';
+$route['products/show/(:any)'] = 'products/show/$1';
 $route['products/browse'] = 'products/get_product';
 $route['products/search_by_price'] = 'products/product_search';
 $route['cart'] = 'products/view_carts';

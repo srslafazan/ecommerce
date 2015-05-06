@@ -54,6 +54,27 @@ class Products extends CI_Controller {
         $this->load->view('customers/shows', $data);
     }
 
+    public function add_to_cart()
+    {     
+       $id = $this->input->post('id');
+       $cart = $this->session->userdata['cart'];
+       if($cart[$id])
+       {
+        $item = $cart[$id];
+        $quantity = $item['quantity'] + $this->input->post('quantity');
+        $cart[$id]['quantity'] = $quantity;
+        $this->session->set_userdata('cart', $cart);
+       }
+       else
+       {
+          $cart[$id] = $this->input->post();     
+          $this->session->set_userdata('cart', $cart);
+       }
+
+      $this->session->set_userdata('quantity', $this->session->userdata('quantity') + $this->input->post('quantity'));
+      redirect('products/view_carts');
+    }
+
     public function sort_by() 
     {
         $post = $this->input->post();
@@ -70,11 +91,11 @@ class Products extends CI_Controller {
         $this->load_home($category, $page, $search);
     }
 
-    public function view_carts() 
-    {
-        $this->load->view('customers/carts');
-    }
-}
+     public function view_carts() 
+     {
+            $this->load->view('customers/carts');
+     }
+ }
 
 
 //end of main controller
