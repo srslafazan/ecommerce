@@ -4,25 +4,28 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+<!-- jquery cdns -->	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-	<!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<!-- Optional theme -->
+<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	<!-- Latest compiled and minified JavaScript -->
+<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<!-- fontawesome -->
+<!-- fontawesome -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  	
- 	<!-- jquery cdn -->
- 	
- 	<!-- local stylesheet -->
+<!-- local stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
 
 	<script type='text/javascript'>
+		$(document).ready(function(){
+			
 
+// end of jQuery
+		});
 	</script>
 
 	<style type="text/css">
@@ -40,7 +43,7 @@
  	<?php $this->load->view('partials/header_red'); ?>
  	<div class="container">
 	
-	 	<!-- ============= Search and filter ==============-->
+<!-- ============= Search and filter ==============-->
 	 
 			<div class="row">
 		    	<form role="form" class='filter'>
@@ -58,7 +61,7 @@
 		    	</form>
 			</div>
 
-	<!-- ================= Show products =======================-->
+<!-- ================= Show products =======================-->
 		<div class='row'>
 			<table class='table table-bordered table-striped'>
 				<thead>
@@ -87,7 +90,8 @@
 				</tr>
 <?php } ?>				
 			</table>
-			<!--pagination-->
+
+<!--pagination-->
 			<div class="page">
 				<a href="#" id="first_link">1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> |
 				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | <a href="#">9</a> | 
@@ -95,6 +99,7 @@
 			</div>
 
 		</div>
-	</div>   <!-- end of container -->
+<!-- end of container -->
+	</div>   
 </body>
 </html>
