@@ -158,7 +158,6 @@ class Admin extends CI_Model {
             );
         return $customer_data;
     }
-<<<<<<< HEAD
 
     public function update($prduct){
 
@@ -199,29 +198,4 @@ class Admin extends CI_Model {
     }
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 3486bbed360967352d0ac40eb5885769e6851159
 }
