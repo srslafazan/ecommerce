@@ -42,3 +42,10 @@ div.col-sm-2.products{
 	width:150px;
 	margin:0;
 }
+
+ul {
+	display:block;
+}
+ul li {
+	display:inline-block;
+}

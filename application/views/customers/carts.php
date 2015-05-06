@@ -5,18 +5,33 @@
     <meta charset="utf-8" />
     <meta name="description" content="This website is using Twitter Bootstrap"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Latest compiled and minified CSS -->
+
+    
+<!-- jquery cdns -->    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <!-- Optional theme -->
+<!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <!-- Latest compiled and minified JavaScript -->
+<!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- fontawesome -->
+<!-- fontawesome -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
     <!-- jquery cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- local stylesheet -->
     <link rel="stylesheet" type="text/css" href="/assets/carts.css"> 
+
+    
+ <!-- local stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
+
+    <script type='text/javascript'>
+    </script>
 </head>
 <body>
 <?php $cart = ($this->session->userdata('cart'));
@@ -25,6 +40,7 @@
 <!-- nav -->
   <?php $this->load->view('partials/header');?>
     <div class='container'>
+
         <h3 class="text-center">Your Cart:</h3>
         <div class="row">
             <div class="col-sm-12">
@@ -71,6 +87,7 @@
                 </div>
             </div>
          </div>
+
 
         <form action='#' method='post' class="form-horizontal">
             <h2>Shipping Information</h2>

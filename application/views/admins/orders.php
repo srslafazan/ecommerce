@@ -4,7 +4,9 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<!-- Optional theme -->
@@ -15,7 +17,6 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
  	
  	<!-- jquery cdn -->
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
  	
  	<!-- local stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
@@ -35,7 +36,7 @@
 	</style>
  </head>
  <body>	
- <?php var_dump($orders) ?>
+
  	<?php $this->load->view('partials/header_red'); ?>
  	<div class="container">
 	
@@ -68,62 +69,23 @@
 					<th>Total</th>
 					<th>Status</th>
 				</thead>
+<?php  	foreach ($orders['orders'] as $order) { ?>
 				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
+					<td><a href="/admins/show_order/<?= $order['order_id'] ?>"><?= $order['order_id'] ?></td>
+					<td><?= $order['customer_name'] ?></td>
+					<td><?= $order['order_date'] ?></td>
+					<td><?= $order['billing_address'] ?></td>
+					<td>$<?= $order['total'] ?></td>
 					<td>
 						<select name='status' class='form-control'>
+							<option value='<?= $order['status'] ?>'>Shipped</option>
 							<option value='shipped'>Shipped</option>
 							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
+							<option value='3'>Cancelled</option>
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>100</td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 dojo way San Jose CA</td>
-					<td>$149.99</td>
-					<td>
-						<select name='status' class='form-control'>
-							<option value='shipped'>Shipped</option>
-							<option value='process'>Order in process</option>
-							<option value='cancelled'>Cancelled</option>
-						</select>
-					</td>
-				</tr>
+<?php } ?>				
 			</table>
 			<!--pagination-->
 			<div class="page">

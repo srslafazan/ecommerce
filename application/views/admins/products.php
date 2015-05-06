@@ -5,7 +5,8 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="This website is using Twitter Bootstrap"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<!-- Optional theme -->
@@ -14,17 +15,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<!-- fontawesome -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
- 	
  	<!-- jquery cdn -->
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
- 	
  	<!-- local stylesheet -->
 	<link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
-
-	<script type='text/javascript'>
-
-
-	</script>
     <style type="text/css">
     	.page {
 			text-align: center;
@@ -34,13 +27,58 @@
 			margin-bottom: 1.5%;
 		}
 
+		  img {
+		    height: 30px;
+		    width: 30px;
+		  }
     </style>
+
+    <script type="text/javascript">
+    	$(document).on("click", ".update", function()
+    	{
+    		var id = $(this).data('id');
+        	var url = "/admins/edit_product/"+id;
+        	$.get(url, function(res){
+        		$('#body').html(res);
+  		 	});
+          	$('#product').modal('show');
+       	});
+
+       	$(document).on("click", "#new_product", function()
+    	{
+        	$.get("/admins/add", function(res){
+        		$('#body').html(res);
+  		 	});
+          	$('#product').modal('show');
+       	});
+
+       	$(document).on("click", ".delete", function()
+    	{
+    		var id = $(this).data('id');
+        	$.get("/admins/delete/"+id, function(res){
+        		$('#body').html(res);
+  		 	});
+          	$('#product').modal('show');
+       	});
+
+       	$(document).on("click", ".prod_button", function(){
+       		if($(this).attr('value') === 'Preview'){
+       			$('#edit_form').attr('target','_blank');
+       			$('#edit_form').attr('action', '/admins/preview_product');
+       		}
+       		else if($(this).attr('value') === ''){
+       			$('#edit_form').attr('action','/admins/preview');
+       			$('#edit_form').attr('target','');
+       		}
+       	});
+
+
+    </script>
 </head>
 <body>	
-<?php var_dump($products); ?>
- 	<?php $this->load->view('partials/header_red'); ?>
- <?php $this->load->view('partials/new_product'); ?>
- 	
+
+<?php require_once(dirname(__FILE__) .'/../partials/header_red.php') ?>
+
  	<div class="container">
 		
 <!-- =========================== Search and filter ======================================-->
@@ -52,7 +90,7 @@
 	    		</div>
 	    	</form> 
 	    	<form class='pull-right filter' action='' method='post'>
-	    		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+	    		<button type="button" class="btn btn-success"  id="new_product">
   					Add new product 
 				</button>
 				<?php $this->session->set_flashdata('edit', '5'); ?>
@@ -72,65 +110,57 @@
 					<th>Quantity Sold</th>
 					<th>action</th>
 				</thead>
+<?php  	foreach ($products['products'] as $product) 
+		{ ?>
 				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
+					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'></td>
+					<td><?= $product['id'] ?></td>
+					<td><?= $product['name'] ?></td>
+					<td><?= $product['inventory'] ?></td>
+					<td><?= $product['id'] ?></td>
+					<td> <a  data-toggle="modal" data-target="" 
+						 data-id="<?= $product['id']?>" class='update'>edit</a> | 
+					<a data-id="<?= $product['id']?>" class='delete' >delete</a> </td>
 				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>
-				<tr>
-					<td> <img src="/assets/images/Hat_Poker.jpg" alt="hat" class='product_img'> </td>
-					<td>1</td>
-					<td>Hat</td>
-					<td>10000</td>
-					<td>9</td>
-					<td> <a href="">edit</a> | <a href="">delete</a> </td>
-				</tr>	
+<?php	}	?>
 			</table>
 
 <!-- =============================pagination ==========================================-->
 
 			<div class='page'>
 				<a href="#" >1</a> | <a href="#">2</a> | <a href="#">3</a> | <a href="#">4</a> |
-				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | <a href="#">9</a> | 
-				<a href="#">10</a> | <a href="#">-></a>
+				<a href="#">5</a> | <a href="#">6</a> | <a href="#">7</a>    | <a href="#">8</a> | 
+				<a href="#">9</a> | <a href="#">10</a> | <a href="#">-></a>
 			</div>  <!-- end of pagination -->
 
 		</div>  <!-- end of show products -->
 	</div>   <!-- end of container -->
 </body>
+
+<!-- ===============================Modal Body========================================== -->
+
+<div class="modal fade" id="product" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<div id="body">
+  <!--======== form gets inserted here ============-->	
+        </div> <!-- end of body -->
+    </div> <!-- end of modal content -->
+  </div>  <!-- end of modal-dialog -->
+</div> <!-- end of modal fade -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>
