@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta name="description" content="This website is using Twitter Bootstrap"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+
     
 <!-- jquery cdns -->    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -17,6 +20,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <!-- fontawesome -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- jquery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- local stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/assets/carts.css"> 
+
     
  <!-- local stylesheet -->
     <link rel="stylesheet" type="text/css" href="/assets/welcome.css"> 
@@ -25,36 +34,62 @@
     </script>
 </head>
 <body>
+<?php $cart = ($this->session->userdata('cart'));
+      $total = 0;?>
+ 
 <!-- nav -->
+  <?php $this->load->view('partials/header');?>
     <div class='container'>
-        <div>
-            <table class='table table-striped table-bordered table-hover'>
-                <thead>
-                    <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Shirt</td>
-                        <td>$5.99</td>
-                        <td>3 
-                            <a href='#'>update</a>
-                            <a href='#'><img src='#' alt='trashcan'></a></td>
-                        
-                        <td>$5.99</td>
-                    </tr>
-                </tbody>
-            </table>
 
-            <p>Total: #####</p>
-            <a href='/'>Continue Shopping</a>
-        </div>
+        <h3 class="text-center">Your Cart:</h3>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class='table table-striped table-bordered table-hover'>
+                    <thead>
+                        <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                      <?php foreach ($cart as $item) { ?>
+                        <tr>
+                            <td><?= $item['name']?></td>
+                            <td>$<?=$item['price']?></td>
+                            <td> 
+                                <div class="row">
+                                    <div class="col-sm-offset-1 col-md-7">
+                                         <?=  $item['quantity']?>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href='#'>Update</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                     <a href='#'><img id="garbage" src="/assets/images/garbage.jpg" alt='trashcan'></a>
+                                    </div>
+                                </div>
+                            </td> 
+                            <td><?= $item['quantity'] * $item['price'];  ?></td>
+                        </tr>
+                         <?php $total += $item['quantity'] + $item['price']; ?>
+                        <?php  } ?>
+                    </tbody>
+                </table>
+            <div class="row">
+                <div class="col-sm-offset-10 col-sm-2">
+                    <p>Your Total: $<strong><?php echo $total ?></strong></p>
+                    <form class="form-inline" action="products/index" method="post">
+                         <button type="submit" class="btn btn-success">Keep Shopping</button>
+                    </form>
+                </div>
+            </div>
+         </div>
 
-        <form action='#' method='post' class='form-horizontal'>
+
+        <form action='#' method='post' class="form-horizontal">
             <h2>Shipping Information</h2>
             <div class='form-group'>
                 <label for='first_name' class='col-sm-2 control-label'>First Name: </label>
@@ -98,9 +133,8 @@
                     <input type='text' name='zipcode' placeholder='Zipcode' class='form-control' id='zipcode'>
                 </div>
             </div>
-        </form>
+       
 
-        <form action='#' method='post' class='form-horizontal'>
             <h2>Billing Information</h2>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-5">
@@ -173,9 +207,14 @@
                     <label for='expiration' class='col-sm-2 control-label'>Expiration: </label>
                     <div class='col-sm-5'>
                         <input type='text' name='expiration' placeholder='Expiration' class='form-control' id='expiration'>
+                    </div>
                 </div>
-        </form>
-
+                <div class='form-group'>
+                  <button type="submit" class="btn btn-default pay">Pay</button>
+                </div>
+           </form>
+        </div>
     </div>
+
 </body>
 </html>
