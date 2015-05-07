@@ -107,6 +107,7 @@
 
 <!--displays all the picures of all our products-->	
 				<div id='products_main'></div>
+				
 			</div>
 		</div>
 	</div>

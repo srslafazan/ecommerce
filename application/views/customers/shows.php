@@ -62,10 +62,6 @@ if(!$this->session->userdata('quantity'))
             </div>
         </div>
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> 8728f9e5ca17e48fae7865a7fc15b21dbd9cb2e9
     <div class="row products_show">
         <p><strong>You May Also Be Interested In:</strong></p>
         <?php foreach ($similars as $similar) { ?>
