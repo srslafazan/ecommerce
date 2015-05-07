@@ -68,6 +68,14 @@
 				return false;
 			});
 			
+// PAGINATION HANDLER
+			$(document).on('click', '.orders_page', function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('tbody').html(res);
+				});
+				return false;
+			});
 
 // END OF JQUERY
 		});
@@ -127,7 +135,24 @@
 
 <!--pagination-->
 
+<ul>
+<?php
+
+for($i = 0 ; $i < CEIL( ( (int)$total_orders ) / 5 ); $i++) { ?>
+
+                <li>
+                    <form action='/admins/load_orders_main' method='post' class='orders_page'>
+                        <input type='hidden' name='search' value="<?= (string)$values['search']; ?>">
+                        <input type='hidden' name='page' value="<?= $i ?>">
+                        <input type='hidden' name='sort' value="<?= (string)$values['sort']; ?>">
+                        <input type='submit' value='<?= ($i+1) ?>'>
+                    </form>
+                </li>
+<?php } ?>
+
+</ul>
 		</div>
+
 <!-- end of container -->
 	</div>   
 </body>
