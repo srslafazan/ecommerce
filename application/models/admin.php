@@ -159,40 +159,52 @@ class Admin extends CI_Model {
         return $customer_data;
     }
 
-    public function update($prduct){
+    public function update($prduct)
+    {
 
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        $query = "SELECT products.*, product_orders.*, product_categories.*, images.* 
-        FROM products LEFT JOIN product_orders ON product_orders.product_id = products.id
-        LEFT JOIN product_categories on product_categories.product_id  = products.id 
-        LEFT JOIN images ON images.product_id = products.id
-        WHERE products.id = 1
-            ";
+        $query = "DELETE FROM products WHERE products.id = ?";
+        $this->db->query($query, array($id));
+        $tables = ['product_orders', 'product_categories', 'images'];
+        foreach ($tables as $table) {
+            $query = "DELETE FROM ". $table ."
+                        WHERE ".$table.".product_id = ?";
+            $this->db->query($query, array($id));
+        }
+            
     }
 
-    public function create($product)
+    public function create($product, $cat)
     {
-
-        $product = array($product['name'], $product['description'],
-                    $price = $product['price']);
+        $product_info = array($product['name'], $product['description'], $product['price']);
         $query = "INSERT INTO products (name, description, price)
                     VALUES (?,?,?)";
-        $this->db->query($query, $product);
+        $this->db->query($query, $product_info);
+        $id =  mysql_insert_id();
+        $values=array($id,$cat );
+        $cat_query = "INSERT INTO product_categories (product_id, category_id)
+                        VALUES(?,?)";
+        $this->db->query($cat_query, $values);                       
 
     }
 
     public function add_cat($cat)
     {
         $query = "SELECT id FROM categories WHERE name = ?";
-        $id = $this->db->$query($query, $cat);
-        if(!$id)
+        $cat_id = $this->db->query($query, $cat)->row_array();
+        if(!$cat_id['id'])
         {
             $query = "INSERT INTO categories (name) VALUES (?)";
-            $id =  $query = "SELECT id FROM categories WHERE name = ?";
+            $this->db->query($query, $cat);
+            $id =  mysql_insert_id();
+        }
+        else
+        {
+            $id = $cat['id'];
         }
         return $id;
     }

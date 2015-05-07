@@ -44,7 +44,7 @@
           <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Or add new category </label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="category" placeholder="Product Name" name='new_category'>
+              <input type="text" class="form-control" id="category" placeholder="Category Name" name='new_category'>
             </div>
           </div>
 

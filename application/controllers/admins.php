@@ -90,23 +90,24 @@ class Admins extends CI_Controller {
 
     public function destroy()
     {
-        $id =  $this->input->post('id');
+        $id =  $this->input->post('product_id');
         $this->Admin->destroy($id);
+        redirect('/admins/products');
     }
 
     public function create()
     {
         $product = $this->input->post();
-        if($this->input->post('new_category'))
+        if($product['new_category']) //checks for presence of new category
+        {//add_cat checks to see if there is already a category by that name
+            $cat_id = $this->Admin->add_cat($product['new_category']);
+        }  //returns id if exists, else inserts and returns new id
+        else
         {
-            echo 'hi';
-            $id = $this->Admin->add_cat($this->input->post('new_category'));
+            $cat_id = $product['category'];
         }
-        die();
-
-          $product = $this->input->post();
-        $this->Admin->create($product);
-        $this->products();
+        $this->Admin->create($product, $cat_id);
+        redirect('/admins/products');
     }
 }
 
