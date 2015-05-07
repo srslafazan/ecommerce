@@ -84,15 +84,12 @@ class Admin extends CI_Model {
 
                         LEFT JOIN product_orders ON product_orders.order_id = orders.id
                         LEFT JOIN customers ON customers.id = orders.user_id
-                        LEFT JOIN addresses ON addresses.id = customers.address_id
-                        LEFT JOIN products ON products.id = product_orders.product_id
                         LEFT JOIN statuses ON statuses.id = orders.status_id
-                        WHERE
-                            CONCAT_WS(' ', first_name , last_name, street, city) 
-                            LIKE ?
-                            AND statuses.status LIKE ?";
+                        WHERE customers.first_name LIKE ?
+                        OR customers.last_name LIKE ?
+                        AND statuses.status LIKE ?";
 
-        $total_orders = $this->db->query( $countquery, array($values[0], $values[1]) )->row_array();
+        $total_orders = $this->db->query( $countquery, array($values[0], $values[1], $values[2] ) )->row_array();
 
         return array('orders' => $this->db->query( $query, $values ) -> result_array(), 
             'values' => array('search' => $search, 'page' => $page, 'sort' => $sort ),
@@ -182,7 +179,7 @@ class Admin extends CI_Model {
 
     public function update($prduct)
     {
-
+            
 
     }
 
