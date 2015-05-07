@@ -36,7 +36,7 @@
 			});
 
 // product_main search, browse, pagination
-			$(document).on('submit', '#sorts, #search_products, .browse_products', function(){
+			$(document).on('submit', '#sorts, .browse_products', function(){
 				var action = $(this).attr('action');
 				$.post(action, $(this).serialize(), function(res){
 					$('#products_main').html(res);
@@ -48,8 +48,19 @@
 				return false;
 			});
 
-//  
+// SEARCH_PRODUCTS HANDLERS
+			$('#search_products').on('keyup', function(){
+				$(this).submit();
+				return false;
+			});
 
+			$(document).on('submit', '#search_products', function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('#products_main').html(res);
+				});		
+				return false;
+			}); 
 
 // pagination handler
 			$(document).on('click', '.product_page', function(){

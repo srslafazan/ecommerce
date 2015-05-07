@@ -28,7 +28,7 @@ class Product extends CI_Model {
 						ON product_categories.category_id = categories.id
 						LEFT JOIN product_orders
 						ON product_orders.product_id = products.id
-						WHERE categories.name = ?
+						WHERE CONCAT_WS(' ', categories.name, products.name, categories.description) LIKE = ?
 						AND products.name LIKE ?
 						GROUP BY products.id
 						ORDER BY total_products DESC
