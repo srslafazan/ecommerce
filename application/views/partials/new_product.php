@@ -34,8 +34,7 @@
               <select class="form-control" id='category' name='category'>
 <?php           for ($i=0; $i < count($categories); $i++) {  ?>
                     <option value='<?=  $categories[$i]['id'] ?>' ><?= $categories[$i]['name']  ?></option>
-<?php            }?>               
-               
+<?php            }?>                 
               </select>
             </div>
           </div>
@@ -44,7 +43,7 @@
           <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Or add new category </label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="category" placeholder="Category Name" name='new_category'>
+              <input type="text" class="form-control" id="category" placeholder="New Category Name" name='new_category'>
             </div>
           </div>
 

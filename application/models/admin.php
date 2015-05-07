@@ -179,7 +179,14 @@ class Admin extends CI_Model {
 
     public function update($prduct)
     {
-            
+        $name = $product['name'];
+        $desciption = $product['desciption'];
+        $price = $product['price'];
+        $category = $product['category'];
+        // $ = $product[''];
+        // $ = $product[''];
+        // $ = $product[''];
+        // $ = $product[''];
 
     }
 

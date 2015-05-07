@@ -87,14 +87,15 @@ class Admins extends CI_Controller {
 
     public function delete($id)
     {
-        $data['product'] = $this->Admin->preview_product($id);
+        $data= $this->Admin->preview_product($id);
         $this->load->view('partials/delete', $data);
     }
 
 //=============================Manage products ==========================
     public function update()
     {
-         $data['product'] = $this->input->post();
+         $data = $this->input->post();
+         var_dump($data);
          $this->Admin->update($data);
     }
 
