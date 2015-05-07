@@ -48,6 +48,15 @@
             </div>
           </div>
 
+<!-- ==============================Inventory ====================================-->
+
+          <div class="form-group">
+            <label for="inventory" class="col-sm-4 control-label">Inventory </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="inventory" placeholder="Quantity on hand" name='inventory'>
+            </div>
+          </div>
+
 <!-- ================================images===================================== -->
           <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Images</label>

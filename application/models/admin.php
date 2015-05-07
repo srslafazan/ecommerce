@@ -124,7 +124,7 @@ class Admin extends CI_Model {
     {
         $values = $id;
         $query =    "SELECT products.id, products.name, products.description, products.price, products.inventory, 
-                    categories.name AS category, categories.id AS category_id FROM products LEFT JOIN product_categories 
+                    categories.name AS category, categories.id AS category_id, products.inventory FROM products LEFT JOIN product_categories 
                     ON product_categories.product_id = products.id LEFT JOIN categories ON categories.id = 
                     product_categories.category_id
                     WHERE products.id = ?";
@@ -198,9 +198,9 @@ class Admin extends CI_Model {
 
     public function create($product, $cat)
     {
-        $product_info = array($product['name'], $product['description'], $product['price']);
-        $query = "INSERT INTO products (name, description, price)
-                    VALUES (?,?,?)";
+        $product_info = array($product['name'], $product['description'], $product['price'], $product['inventory']);
+        $query = "INSERT INTO products (name, description, price, inventory)
+                    VALUES (?,?,?, ?)";
         $this->db->query($query, $product_info);
         $id =  mysql_insert_id();
         $values=array($id,$cat );
@@ -214,7 +214,7 @@ class Admin extends CI_Model {
     {
         $query = "SELECT id FROM categories WHERE name = ?";
         $cat_id = $this->db->query($query, $cat)->row_array();
-        if(!$cat_id['id'])
+        if(!$cat_id['product_id'])
         {
             $query = "INSERT INTO categories (name) VALUES (?)";
             $this->db->query($query, $cat);
@@ -222,7 +222,7 @@ class Admin extends CI_Model {
         }
         else
         {
-            $id = $cat['id'];
+            $id = $cat['product_id'];
         }
         return $id;
     }
