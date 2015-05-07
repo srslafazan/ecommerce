@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Orders</title>
@@ -32,6 +33,7 @@
 			$(document).on('change', '#sort select', function(){
 				$(this).parent().submit();
 			});
+
 			$(document).on('submit', '#sort', function(){
 				var action = $(this).attr('action');
 				$.post(action, $(this).serialize(), function(res){
@@ -39,7 +41,34 @@
 				});
 				return false;
 			});
+
+// .ORDER_STATUS
+			$(document).on('change', '.order_status', function(){
+				$(this).submit();
+			});
+
+			$(document).on('submit', '.order_status', function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('tbody').html(res);
+				});	
+				return false;
+			});
+
+// #SEARCH ORDERS
+			$('#search').on('keyup', function(){
+				$(this).submit();
+			});
+
+			$('#search').submit(function(){
+				var action = $(this).attr('action');
+				$.post(action, $(this).serialize(), function(res){
+					$('tbody').html(res);
+				});	
+				return false;
+			});
 			
+
 // END OF JQUERY
 		});
 	</script>
@@ -59,40 +88,42 @@
  	<div class="container">
 	
 <!-- ============= Search and filter ==============-->
-			<div class="row">
-		    	<form role="form" class='filter'>
-		    		<div class="form group has-feedback has-feedback-left ">		  	
-			    		<input type='text' name='search'  class='search form-control' placeholder='search'/>
-		    		</div>
-		    	</form> 
-		    	<form action='/admins/load_orders_main' method='post' class='pull-right filter' id='sort'>
-		    		<select name='sort' class='form-control'>
-		    			<option value='3'>Show All</option>
-		    			<option value='1'>In Process</option>
-		    			<option value='2'>Shipped</option>
-		    		</select>
-		    		<input type='hidden' name='search' value='%'>
-		    		<input type='hidden' name='page' value='0'>
-		    	</form>
-			</div>
+		<div class="row">
+
+<!-- SEARCH -->
+	    	<form action='search_orders' method='post' role="form" class='filter' id='search'>
+	    		<div class="form group has-feedback has-feedback-left ">		  	
+		    		<input type='text' name='search'  class='search form-control' placeholder='search'/>
+	    		</div>
+	    	</form>
+
+<!-- SORT -->
+	    	<form action='/admins/load_orders_main' method='post' class='pull-right filter' id='sort'>
+	    		<select name='sort' class='form-control'>
+	    			<option value='3'>Show All</option>
+	    			<option value='1'>In Process</option>
+	    			<option value='2'>Shipped</option>
+	    		</select>
+	    		<input type='hidden' name='search' value='%'>
+	    		<input type='hidden' name='page' value='0'>
+	    	</form>
+		</div>
 
 <!-- ================= Show products =======================-->
-<div class='row'>
-    <table class='table table-bordered table-striped'>
-        <thead>
-            <th>Order ID</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Billing Address</th>
-            <th>Total</th>
-            <th>Status</th>
-        </thead>
+		<div class='row'>
+		    <table class='table table-bordered table-striped'>
+		        <thead>
+		            <th>Order ID</th>
+		            <th>Name</th>
+		            <th>Date</th>
+		            <th>Billing Address</th>
+		            <th>Total</th>
+		            <th>Status</th>
+		        </thead>
 
 <!-- ORDERS_MAIN / LOAD_ORDERS_MAIN --> 
-        <tbody>
-
-        </tbody>
-    </table>
+		        <tbody></tbody>
+		    </table>
 
 <!--pagination-->
 

@@ -48,6 +48,9 @@
 				return false;
 			});
 
+//  
+
+
 // pagination handler
 			$(document).on('click', '.product_page', function(){
 				var action = $(this).attr('action');
