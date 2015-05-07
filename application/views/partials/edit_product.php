@@ -3,9 +3,11 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class='modal-title' id='myModalLabel'>Edit product - ID <?= $product['id'] ?></h4>
+        <input type='hidden' name='id' value='<?= $product['id'] ?>'/>
       </div>
 
         <div class="modal-body">
+
 <!-- ================================= product name================================]==   -->
           <div class="form-group">
             <label for="name" class="col-sm-4 control-label">Name</label>
@@ -14,6 +16,7 @@
               value="<?= $product['name'] ?>">
             </div>
           </div>
+
 <!-- ============================product description ============================= -->
           <div class="form-group">
             <label for="description" class="col-sm-4 control-label">Product Description</label>
@@ -23,6 +26,7 @@
               </textarea>
             </div>
           </div>
+
 <!-- ===============================price=========================================== -->
           <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Price</label>
@@ -31,18 +35,28 @@
               value="<?= $product['price']; ?>">
             </div>
           </div>
+
+<!-- ==============================Inventory======================================= -->
+          <div class="form-group">
+            <label for="inventory" class="col-sm-4 control-label">Inventory </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="inventory" placeholder="Quantity on hand" name='inventory'
+              value="<?= $product['inventory'] ?>">
+            </div>
+          </div>
+
 <!-- =============================category select================================= -->
            <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Categories</label>
              <div class="col-sm-6">
+              <input type='hidden' name='existing_cat' value="<?= $product['category_id'] ?>"/>
               <select class="form-control" id='category' name='category'>
                 <option value='<?= $product['category_id'] ?>' ><?= $product['category'] ?></option>
 <?php           for ($i=0; $i < count($categories); $i++) {  
                   if($categories[$i]['id'] != $product['category_id']) {  ?>
                     <option value='<?=  $categories[$i]['id'] ?>' ><?= $categories[$i]['name']  ?></option>
 <?php              }
-                 }?>               
-               
+                 }?>                  
               </select>
             </div>
           </div>
@@ -54,17 +68,7 @@
               <input type="text" class="form-control" id="category" placeholder="Product Name" name='new_category'>
             </div>
           </div>
-
-<!-- ==============================Inventory======================================= -->
-
-          <div class="form-group">
-            <label for="inventory" class="col-sm-4 control-label">Inventory </label>
-            <div class="col-sm-6">
-              <input type="text" class="form-control" id="inventory" placeholder="Quantity on hand" name='inventory'
-              value="<?= $product['inventory'] ?>">
-            </div>
-          </div>
-
+          
 <!-- ================================images===================================== -->
           <div class="form-group">
             <label for="category" class="col-sm-4 control-label">Images</label>

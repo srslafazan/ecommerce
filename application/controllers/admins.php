@@ -94,9 +94,8 @@ class Admins extends CI_Controller {
 //=============================Manage products ==========================
     public function update()
     {
-         $data = $this->input->post();
-         var_dump($data);
-         $this->Admin->update($data);
+        $this->Admin->update($this->input->post());
+        redirect('/admins/products');
     }
 
     public function preview()
@@ -114,16 +113,7 @@ class Admins extends CI_Controller {
 
     public function create()
     {
-        $product = $this->input->post();
-        if($product['new_category']) //checks for presence of new category
-        {//add_cat checks to see if there is already a category by that name
-            $cat_id = $this->Admin->add_cat($product['new_category']);
-        }  //returns id if exists, else inserts and returns new id
-        else
-        {
-            $cat_id = $product['category'];
-        }
-        $this->Admin->create($product, $cat_id);
+        $this->Admin->create($this->input->post());
         redirect('/admins/products');
     }
 }

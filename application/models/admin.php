@@ -177,18 +177,27 @@ class Admin extends CI_Model {
         return $customer_data;
     }
 
-    public function update($prduct)
-    {
-        $name = $product['name'];
-        $desciption = $product['desciption'];
-        $price = $product['price'];
-        $category = $product['category'];
-        // $ = $product[''];
-        // $ = $product[''];
-        // $ = $product[''];
-        // $ = $product[''];
 
+
+
+
+    public function update($product)
+    {
+        if($product['new_category']) {
+            $cat = $this->add_cat($product['new_category']);
+        }  else {
+            $cat = $product['category'];
+        }
+        $product_query = "UPDATE products SET name=?, description=?, price=?, inventory=? WHERE id=?";
+        $values = array($product['name'], $product['description'], $product['price'], $product['inventory'], $product['id']);
+        $this->db->query($product_query, $values);
+        $cat_values=array($cat, $product['id'], $product['existing_cat']);
+        $cat_query = "UPDATE product_categories SET category_id=? WHERE product_id=? AND category_id=?;";
+        $this->db->query($cat_query, $cat_values);             
     }
+
+
+
 
     public function destroy($id)
     {
@@ -203,8 +212,15 @@ class Admin extends CI_Model {
             
     }
 
-    public function create($product, $cat)
+// ===================create a new product======================
+
+    public function create($product)
     {
+        if($product['new_category']) {
+            $cat = $this->add_cat($product['new_category']);
+        }  else {
+            $cat = $product['category'];
+        }
         $product_info = array($product['name'], $product['description'], $product['price'], $product['inventory']);
         $query = "INSERT INTO products (name, description, price, inventory)
                     VALUES (?,?,?, ?)";
@@ -217,11 +233,13 @@ class Admin extends CI_Model {
 
     }
 
+// ============if New Category field is filled out, this checks to see if it is already in the database========
+// ============if it is, returns id, if not inserts into database and returns new id===========================
     public function add_cat($cat)
     {
         $query = "SELECT id FROM categories WHERE name = ?";
         $cat_id = $this->db->query($query, $cat)->row_array();
-        if(!$cat_id['product_id'])
+        if(!$cat_id)
         {
             $query = "INSERT INTO categories (name) VALUES (?)";
             $this->db->query($query, $cat);
@@ -229,7 +247,7 @@ class Admin extends CI_Model {
         }
         else
         {
-            $id = $cat['product_id'];
+            $id = $cat_id;
         }
         return $id;
     }

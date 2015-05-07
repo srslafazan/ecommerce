@@ -17,6 +17,10 @@
              });
         });  
     </script>
+<?php   if($product['images_preview'])
+        {
+          $images = explode(' ', $product['images_preview']);
+        }   ?>
 </head>
 <body>
 <!-- nav -->
@@ -28,11 +32,15 @@
             <div class="col-sm-6">
                 
                 <h2 class="header"><?= $product['name'] ?></h2>
-                <a href="#"><img id="big_pic" src="/assets/images/<?=$product['image1']?>" alt='product image'></a>
-                <div class='thumbnails'>
-                    <?php  foreach ($products as $product) {?>
-                    <a href="#"><img class="prod_thumbnails" src="/assets/images/<?= $product['photo_url']  ?>" alt='product thumbnail'></a>
-                    <?php } ?>
+<?php     if(!empty($images))
+          { ?>                
+              <a href="#"><img id="big_pic" src="/assets/images/<?=$product['image1']?>" alt='product image'></a>
+              <div class='thumbnails'>
+<?php         for($i=0; $i<(count($images)-1); $i++) 
+              {   ?>                
+                <a href="#"><img class="prod_thumbnails" src="/assets/images/<?= $images[$i]  ?>" alt='product thumbnail'></a>
+<?php         }   
+          }?>    
                 </div>
             </div>
     
@@ -40,7 +48,7 @@
         <div class="col-md-6 description">
                 <p><?=  $product['description']  ?></p>
         </div>
-    </div>
+    </div> <!-- end of row -->
 
     <div class="row">
       <div class="col-sm-offset-8 col-sm-3">
@@ -60,5 +68,6 @@
         </form>
       </div>
     </div>
+    </div> <!-- end of container -->
 </body>
 </html>
