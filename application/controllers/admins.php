@@ -13,7 +13,8 @@ class Admins extends CI_Controller {
     {
         $this->load->view('admins/signins');
     }
-    
+
+// ORDERS
     public function orders()
     {
         $data = $this->Admin->get_orders();
@@ -32,6 +33,21 @@ class Admins extends CI_Controller {
         $data = $this->Admin->get_orders( $post['search'], $post['page'], $post['sort']);
         $this->load->view('partials/orders_main', $data);
     }
+
+    public function search_orders()
+    {
+        $post = $this->input->post();
+        $data = $this->Admin->get_orders($post['search']);
+        $this->load->view('partials/orders_main', $data);
+    }
+
+    public function change_order_status()
+    {
+        $post = $this->input->post();
+        $data = $this->Admin->change_order_status($post);
+        $this->orders_main();
+    }
+
 
 // ==================individidual order page ==========================
     

@@ -39,7 +39,7 @@ for($i = 0 ; $i < CEIL( ( (int)$total_products ) / 5 ); $i++) { ?>
 
                 <li>
                     <form action='/products/load_main' method='post' class='product_page'>
-                        <input put type="hidden" name="category" value="<?= (string)$values['category']; ?>">
+                        <input type="hidden" name="category" value="<?= (string)$values['category']; ?>">
                         <input type='hidden' name='search' value="<?= (string)$values['search']; ?>">
                         <input type='hidden' name='page' value="<?= $i ?>">
                         <input type='hidden' name='sort' value="<?= (string)$values['sort']; ?>">

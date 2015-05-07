@@ -43,12 +43,13 @@ class Admin extends CI_Model {
 // ==========Get all orders grouped by orders id for admin orders page ============================
     public function get_orders($search = '%', $page = 0, $sort = 3){
 
+        $page = 5 * (int)$page;
+
         if ($search != '%'){
             $search_input = '%' . $search . '%';
         } else {
             $search_input = $search;
         }
-        $page = 5 * (int)$page;
 
         switch($sort){
             case 0: $sort_input = '%cancel%';
@@ -60,25 +61,22 @@ class Admin extends CI_Model {
             case 3: $sort_input = '%';
         }
 
-        if(!empty($search_input) && $search_input != '%') { $search_input = "%" . $search_input . "%"; 
-            } else { $search_input = "%"; }
-
         $values = array( $search_input, $sort_input, $page );
 
         $query = "  SELECT orders.id AS order_id, orders.created_at AS order_date, orders.status_id AS order_status, 
                     customers.id AS customer_id, CONCAT_WS(' ', customers.first_name, customers.lASt_name) AS customer_name, 
                     CONCAT(CONCAT_WS(' ', addresses.street, addresses.city), ', ', addresses.state, ' ', addresses.zipcode) 
-                    AS billing_address, sum(products.price * product_orders.quantity) AS total, statuses.status FROM orders
+                    AS billing_address, sum(products.price * product_orders.quantity) AS total, statuses.status, addresses.street, addresses.city FROM orders
 
                     LEFT JOIN product_orders ON product_orders.order_id = orders.id
                     LEFT JOIN customers ON customers.id = orders.user_id
                     LEFT JOIN addresses ON addresses.id = customers.address_id
                     LEFT JOIN products ON products.id = product_orders.product_id
                     LEFT JOIN statuses ON statuses.id = orders.status_id
-                    WHERE customers.first_name
-                    OR customers.last_name
-                    OR orders.id LIKE ?
-                    AND statuses.status LIKE ?
+                    WHERE
+                        CONCAT_WS(' ', first_name , last_name, street, city) 
+                        LIKE ?
+                        AND statuses.status LIKE ?
                     GROUP BY orders.id
                     LIMIT ?, 5;";
 
@@ -87,17 +85,37 @@ class Admin extends CI_Model {
                         LEFT JOIN product_orders ON product_orders.order_id = orders.id
                         LEFT JOIN customers ON customers.id = orders.user_id
                         LEFT JOIN statuses ON statuses.id = orders.status_id
-                        WHERE customers.first_name
-                        OR customers.last_name
-                        OR orders.id LIKE ?
+                        WHERE customers.first_name LIKE ?
+                        OR customers.last_name LIKE ?
                         AND statuses.status LIKE ?";
 
-        $total_orders = $this->db->query( $countquery, array($values[0], $values[1]) )->row_array();
+        $total_orders = $this->db->query( $countquery, array($values[0], $values[1], $values[2] ) )->row_array();
 
         return array('orders' => $this->db->query( $query, $values ) -> result_array(), 
             'values' => array('search' => $search, 'page' => $page, 'sort' => $sort ),
             'total_orders' => $total_orders['total_orders']
             );
+    }
+
+    public function change_order_status($post){
+
+        $old_status = $post['status'];
+        $order_id = $post['order_id'];
+
+        switch($old_status){
+            case 'In Process': $new_status = 1;
+            break;
+            case 'Shipped': $new_status = 2;
+            break;
+            case 'Cancelled': $new_status = 3;
+        }
+
+        $query = "  UPDATE orders
+                    SET status_id = ? WHERE id = ?";
+
+        $values = array($new_status, $order_id);
+
+        return $this->db->query($query, $values);
     }
 
 // ================preview product from the add new product or edit product modal=====================
